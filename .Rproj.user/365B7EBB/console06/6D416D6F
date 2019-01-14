@@ -4,3 +4,63 @@
 ]0;~/consulting/advanced_analysis_in_rMichaels-MacBook-Pro:advanced_analysis_in_r michael$ git init
 Initialized empty Git repository in /Users/michael/consulting/advanced_analysis_in_r/.git/
 ]0;~/consulting/advanced_analysis_in_rMichaels-MacBook-Pro:advanced_analysis_in_r michael$ git add --a
+]0;~/consulting/advanced_analysis_in_rMichaels-MacBook-Pro:advanced_analysis_in_r michael$ git commit -m"first commit"
+[master (root-commit) 36e84ab] first commit
+ 42 files changed, 847 insertions(+)
+ create mode 100644 .Rproj.user/365B7EBB/console06/6D416D6F
+ create mode 100644 .Rproj.user/365B7EBB/console06/6D416D6F.env
+ create mode 100644 .Rproj.user/365B7EBB/console06/INDEX001
+ create mode 100644 .Rproj.user/365B7EBB/sources/prop/124E081C
+ create mode 100644 .Rproj.user/365B7EBB/sources/prop/184B4CE
+ create mode 100644 .Rproj.user/365B7EBB/sources/prop/2A5B88D7
+ create mode 100644 .Rproj.user/365B7EBB/sources/prop/95F13A18
+ create mode 100644 .Rproj.user/365B7EBB/sources/prop/B2E9411D
+ create mode 100644 .Rproj.user/365B7EBB/sources/prop/BE2CE396
+ create mode 100644 .Rproj.user/365B7EBB/sources/prop/DEBDEE43
+ create mode 100644 .Rproj.user/365B7EBB/sources/prop/EBCCF694
+ create mode 100644 .Rproj.user/365B7EBB/sources/prop/INDEX
+ create mode 100644 .Rproj.user/365B7EBB/sources/s-275DFF3D/159AE579
+ create mode 100644 .Rproj.user/365B7EBB/sources/s-275DFF3D/159AE579-contents
+ create mode 100644 .Rproj.user/365B7EBB/sources/s-275DFF3D/60576E2E
+ create mode 100644 .Rproj.user/365B7EBB/sources/s-275DFF3D/60576E2E-contents
+ create mode 100644 .Rproj.user/365B7EBB/sources/s-275DFF3D/62D39223
+ create mode 100644 .Rproj.user/365B7EBB/sources/s-275DFF3D/62D39223-contents
+ create mode 100644 .Rproj.user/365B7EBB/sources/s-275DFF3D/8B3AE8FB-contents
+ create mode 100644 .Rproj.user/365B7EBB/sources/s-275DFF3D/90880F9A
+ create mode 100644 .Rproj.user/365B7EBB/sources/s-275DFF3D/90880F9A-contents
+ create mode 100644 .Rproj.user/365B7EBB/sources/s-275DFF3D/9F6D0A96-contents
+ create mode 100644 .Rproj.user/365B7EBB/sources/s-275DFF3D/CD622BC4-contents
+ create mode 100644 .Rproj.user/365B7EBB/sources/s-275DFF3D/DDD4776F-contents
+ create mode 100644 .Rproj.user/365B7EBB/sources/s-275DFF3D/lock_file
+ create mode 100644 .Rproj.user/shared/notebooks/2E04B842-lectures/1/365B7EBB275DFF3D/chunks.json
+ create mode 100644 .Rproj.user/shared/notebooks/2E04B842-lectures/1/s/chunks.json
+ create mode 100644 .Rproj.user/shared/notebooks/E002D24E-index/1/s/chunks.json
+ create mode 100644 .Rproj.user/shared/notebooks/patch-chunk-names
+ create mode 100644 .Rproj.user/shared/notebooks/paths
+ create mode 100644 README.MD
+ create mode 100644 _setup.Rmd
+ create mode 100644 _site.yml
+ create mode 100644 advanced_analysis_in_r.Rproj
+ create mode 100644 exercises.Rmd
+ create mode 100644 index.Rmd
+ create mode 100644 lectures.Rmd
+ create mode 100644 library.bib
+ create mode 100644 resources.Rmd
+ create mode 100644 style.css
+ create mode 100644 syllabus.Rmd
+ create mode 100644 utils.R
+]0;~/consulting/advanced_analysis_in_rMichaels-MacBook-Pro:advanced_analysis_in_r michael$ git remote add origin https://github.com/medewitt/ advanced_analysis_in_r.git
+]0;~/consulting/advanced_analysis_in_rMichaels-MacBook-Pro:advanced_analysis_in_r michael$ git push -u origin master
+Counting objects: 45, done.
+Delta compression using up to 4 threads.
+Compressing objects:   2% (1/37)   Compressing objects:   5% (2/37)   Compressing objects:   8% (3/37)   Compressing objects:  10% (4/37)   Compressing objects:  13% (5/37)   Compressing objects:  16% (6/37)   Compressing objects:  18% (7/37)   Compressing objects:  21% (8/37)   Compressing objects:  24% (9/37)   Compressing objects:  27% (10/37)   Compressing objects:  29% (11/37)   Compressing objects:  32% (12/37)   Compressing objects:  35% (13/37)   Compressing objects:  37% (14/37)   Compressing objects:  40% (15/37)   Compressing objects:  43% (16/37)   Compressing objects:  45% (17/37)   Compressing objects:  48% (18/37)   Compressing objects:  51% (19/37)   Compressing objects:  54% (20/37)   Compressing objects:  56% (21/37)   Compressing objects:  59% (22/37)   Compressing objects:  62% (23/37)   Compressing objects:  64% (24/37)   Compressing objects:  67% (25/37)   Compressing objects:  70% (26/37)   Compressing objects:  72% (27/37)   Compressing objects:  75% (28/37)   Compressing objects:  78% (29/37)   Compressing objects:  81% (30/37)   Compressing objects:  83% (31/37)   Compressing objects:  86% (32/37)   Compressing objects:  89% (33/37)   Compressing objects:  91% (34/37)   Compressing objects:  94% (35/37)   Compressing objects:  97% (36/37)   Compressing objects: 100% (37/37)   Compressing objects: 100% (37/37), done.
+Writing objects:   2% (1/45)   Writing objects:   4% (2/45)   Writing objects:   6% (3/45)   Writing objects:   8% (4/45)   Writing objects:  11% (5/45)   Writing objects:  13% (6/45)   Writing objects:  15% (7/45)   Writing objects:  17% (8/45)   Writing objects:  20% (9/45)   Writing objects:  22% (10/45)   Writing objects:  24% (11/45)   Writing objects:  26% (12/45)   Writing objects:  28% (13/45)   Writing objects:  31% (14/45)   Writing objects:  33% (15/45)   Writing objects:  35% (16/45)   Writing objects:  37% (17/45)   Writing objects:  42% (19/45)   Writing objects:  44% (20/45)   Writing objects:  46% (21/45)   Writing objects:  48% (22/45)   Writing objects:  51% (23/45)   Writing objects:  53% (24/45)   Writing objects:  55% (25/45)   Writing objects:  57% (26/45)   Writing objects:  60% (27/45)   Writing objects:  62% (28/45)   Writing objects:  64% (29/45)   Writing objects:  66% (30/45)   Writing objects:  68% (31/45)   Writing objects:  71% (32/45)   Writing objects:  73% (33/45)   Writing objects:  75% (34/45)   Writing objects:  77% (35/45)   Writing objects:  80% (36/45)   Writing objects:  82% (37/45)   Writing objects:  84% (38/45)   Writing objects:  86% (39/45)   Writing objects:  88% (40/45)   Writing objects:  91% (41/45)   Writing objects:  93% (42/45)   Writing objects:  95% (43/45)   Writing objects:  97% (44/45)   Writing objects: 100% (45/45)   Writing objects: 100% (45/45), 10.01 KiB | 0 bytes/s, done.
+Total 45 (delta 5), reused 0 (delta 0)
+remote: Resolving deltas:   0% (0/5)   [Kremote: Resolving deltas:  20% (1/5)   [Kremote: Resolving deltas:  80% (4/5)   [Kremote: Resolving deltas: 100% (5/5)   [Kremote: Resolving deltas: 100% (5/5), done.[K
+To https://github.com/medewitt/advanced_analysis_in_r.git
+ * [new branch]      master -> master
+Branch master set up to track remote branch master from origin.
+]0;~/consulting/advanced_analysis_in_rMichaels-MacBook-Pro:advanced_analysis_in_r michael$ touch .nojekl[Kyll
+]0;~/consulting/advanced_analysis_in_rMichaels-MacBook-Pro:advanced_analysis_in_r michael$ add --a
+bash: add: command not found
+]0;~/consulting/advanced_analysis_in_rMichaels-MacBook-Pro:advanced_analysis_in_r michael$ git[K[K[Kgit add --a
