@@ -1,0 +1,34 @@
+---
+title: Lectures
+bibliography: library.bib
+biblio-style: apalike
+---
+
+```{r, child="_setup.Rmd"}
+```
+
+## Building R Markdown Documents
+
+### tldr:
+>An overview of R, RStudio and github. The focus is on orienting users to R via R Studio and getting comfortable within the IDE.
+
+
+```{r echo=FALSE, results='asis'}
+make_doc_links("rmarkdown")
+```
+
+<!--
+
+## Survey Analysis
+
+```{r echo=FALSE, results='asis'}
+make_doc_links("survey_analysis")
+```
+
+## Bayesian Modeling
+
+```{r echo=FALSE, results='asis'}
+make_doc_links("bayesian_modeling")
+```
+
+-->

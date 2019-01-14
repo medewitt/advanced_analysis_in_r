@@ -1,0 +1,6 @@
+]0;~/consulting/advanced_analysis_in_r[?1034hMichaels-MacBook-Pro:advanced_analysis_in_r michael$ [KMichaels-MacBook-Pro:advanced_analysis_in_r michael$ mkdir ra[Kmarkdown
+]0;~/consulting/advanced_analysis_in_rMichaels-MacBook-Pro:advanced_analysis_in_r michael$ mkdir surveye[K_analyss[Kis
+]0;~/consulting/advanced_analysis_in_rMichaels-MacBook-Pro:advanced_analysis_in_r michael$ mkdir bayesian_modeling
+]0;~/consulting/advanced_analysis_in_rMichaels-MacBook-Pro:advanced_analysis_in_r michael$ git init
+Initialized empty Git repository in /Users/michael/consulting/advanced_analysis_in_r/.git/
+]0;~/consulting/advanced_analysis_in_rMichaels-MacBook-Pro:advanced_analysis_in_r michael$ git add --a

@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1547484839469.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2086545631",
+    "id" : "60576E2E",
+    "lastKnownWriteTime" : 1547484531,
+    "last_content_update" : 1547484531,
+    "path" : "~/consulting/advanced_analysis_in_r/resources.Rmd",
+    "project_path" : "resources.Rmd",
+    "properties" : {
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}
