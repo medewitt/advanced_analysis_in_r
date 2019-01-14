@@ -1,19 +1,19 @@
 {
     "collab_server" : "",
     "contents" : "",
-    "created" : 1547484717659.000,
+    "created" : 1547486802230.000,
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
     "hash" : "0",
-    "id" : "62D39223",
-    "lastKnownWriteTime" : 1547484812,
-    "last_content_update" : 1547484812114,
-    "path" : "~/consulting/advanced_analysis_in_r/lectures.Rmd",
-    "project_path" : "lectures.Rmd",
+    "id" : "F229CAA3",
+    "lastKnownWriteTime" : 1547485604,
+    "last_content_update" : 1547485604,
+    "path" : "~/consulting/advanced_analysis_in_r/index.Rmd",
+    "project_path" : "index.Rmd",
     "properties" : {
-        "cursorPosition" : "10,0",
-        "scrollLine" : "0"
+        "cursorPosition" : "22,37",
+        "scrollLine" : "13"
     },
     "read_only" : false,
     "read_only_alternatives" : [

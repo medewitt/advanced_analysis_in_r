@@ -7,10 +7,12 @@ biblio-style: apalike
 ```{r, child="_setup.Rmd"}
 ```
 
-<div class="jumbotron">
+## A Little about resources
 
-<h1>Just a test</h1>
 
-I wanted to test this feature
+## Rmarkdown
 
-</div>
+## Survey Analysis in R
+
+## Bayesian Modeling and Inference
+
