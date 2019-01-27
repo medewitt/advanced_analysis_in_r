@@ -1,0 +1,2 @@
+\beamer@sectionintoc {1}{Why is \texttt {rmarkdown} important?}{2}{0}{1}
+\beamer@sectionintoc {2}{Building Your Documents}{16}{0}{2}

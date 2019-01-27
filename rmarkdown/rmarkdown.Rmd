@@ -1,30 +1,104 @@
 ---
-title: "R Markdown"
+title: "Advanced Data Analysis in R"
+subtitle: "Advanced `rmarkdown`"
 author: "Michael DeWitt"
-date: "1/14/2019 (Updated `r Sys.Date()`)"
-output: 
-  ioslides_presentation:
-    widescreen: true
+date: "2018-02-09 (Updated `r Sys.Date()`)"
+output:
+  beamer_presentation:
+    keep_tex: false
+    theme: metropolis
+    slide_level: 2
     incremental: true
-    css: ../style.css
+    includes:
+      in_header: head.txt
+fontsize: 12pt
+classoption: compress
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  echo = TRUE,
+  cache = TRUE,
+  warning = FALSE,
+  message = FALSE,
+  fig.align = "center"
+)
+library(tidyverse)
+library(broom)
+library(here)
+set.seed(27)
+options(
+  tibble.print_max = 3,
+  tibble.print_min = 3,
+  width = 55
+)
+theme_set(theme_gray(base_size = 22))
 ```
 
-# Getting Started
+# Why is `rmarkdown` important?
 
-## This is it
 
-- One
+## It's all about communication and documentation!
 
-- Two
+1. We used have notebooks to document our work:
 
-## Testing
-
-```{r}
-1+2
+```{r notebook, echo=FALSE, out.width="100px"}
+knitr::include_graphics(here("rmarkdown", "notebook.jpg"))
 ```
 
-Yep.
+2. Our reports change change with our data
+
+## Reproducibility
+
+- Tying our analysis to our output documentation
+
+- No more of this <https://youtu.be/s3JldKoA0zw>
+
+## Sold? So how do I do it?
+
+Rmarkdown integrates R and the Markdown language into a single method
+
+Rmarkdown documents end in `.Rmd` extension
+
+Can be created from within the R Studio Integrated Development Environment (IDE)
+
+## Some technical details...
+
+- `rmarkdown` (and `bookdown`) compile their outputs to [pandoc](https://pandoc.org/)
+- Depending on the output specified
+  - \LaTeX for pdf style outputs (and beamer)
+  - html
+  - html + javascript
+  - ebpub
+  - ...
+- Specific commands can be issued depending on the output used (\LaTeX and/or html tags)
+
+# Building Your Documents
+
+## Parts of An R Markdown Documents
+
+`yml` header instructs to `pandoc` engine how to build the documents
+
+```
+---
+title:
+subtitle:
+author:
+date:
+output:
+---
+
+```
+
+## Other Resources
+
+### Rmarkdown
+[R Studio Cheat Sheets](https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf) for the basic commands
+[Introduction to Rmarkdown](https://rmarkdown.rstudio.com/lesson-1.html) for the basic ideas and getting started
+[R Markdown Definitive Guide](https://bookdown.org/yihui/rmarkdown/) for the details for how Rmarkdown works
+
+### Bookdown
+
+### Blogdown
+

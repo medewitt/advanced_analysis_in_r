@@ -1,0 +1,16 @@
+\frametitle{Parts of An R Markdown Documents}
+\protect\hypertarget{parts-of-an-r-markdown-documents}{}
+
+\texttt{yml} header instructs to \texttt{pandoc} engine how to build the
+documents
+
+\begin{verbatim}
+---
+title:
+subtitle:
+author:
+date:
+output:
+---
+\end{verbatim}
+
