@@ -8,7 +8,7 @@ output:
     keep_tex: false
     theme: metropolis
     slide_level: 2
-    incremental: true
+    incremental: false
     includes:
       in_header: head.txt
 fontsize: 12pt
@@ -51,17 +51,17 @@ knitr::include_graphics(here("rmarkdown", "notebook.jpg"))
 
 ## Reproducibility
 
-- Tying our analysis to our output documentation
+- Tying our analysis to our \alert{output documentation}
 
 - No more of this <https://youtu.be/s3JldKoA0zw>
 
 ## Sold? So how do I do it?
 
-Rmarkdown integrates R and the Markdown language into a single method
+- Rmarkdown integrates R and the Markdown language into a single method
 
-Rmarkdown documents end in `.Rmd` extension
+- Rmarkdown documents end in `.Rmd` extension
 
-Can be created from within the R Studio Integrated Development Environment (IDE)
+- Can be created from within the [R Studio](https://www.rstudio.com/) Integrated Development Environment (IDE)
 
 ## Some technical details...
 
@@ -70,11 +70,21 @@ Can be created from within the R Studio Integrated Development Environment (IDE)
   - \LaTeX for pdf style outputs (and beamer)
   - html
   - html + javascript
-  - ebpub
+  - epub
   - ...
 - Specific commands can be issued depending on the output used (\LaTeX and/or html tags)
 
 # Building Your Documents
+
+## Three Components to an Rmarkdown Documents
+
+1. \alert{yml} header than contains metadata and build instructions
+
+2. \alert{Markdown} mark-up conventions
+
+3. \alert{Code chunks} with language and output instructions
+
+# _Y_et Another _M_arkup _L_anguage
 
 ## Parts of An R Markdown Documents
 
@@ -85,11 +95,141 @@ Can be created from within the R Studio Integrated Development Environment (IDE)
 title:
 subtitle:
 author:
+abstract:
 date:
 output:
 ---
 
 ```
+
+## You can access R code from within the yml
+
+Utilising backticks and the letter "r" you can \alert{include R code into your `yml`}
+
+```
+---
+title: "This is a quick example"
+subtitle: "Just to illustrate a point"
+author: "William Gosset"
+date: "2018-01-23 Updated(`r Sys.Date()`)"
+abstract: "Just a little exloration of things. We looked at `nrow(data)` samples"
+output:
+  pdf_document
+---
+
+```
+
+## A Little More About Outputs...
+
+### Rmarkdown Outputs
+- **pdf_document**
+- **word_document**
+- **html_document**
+
+### Presentations
+- **io_presentation**
+- **beamer_presentation**
+
+### My Prefered
+- **bookdown::pdf_document2**^[Almost identical to pdf_output but provides additional control over code chuck references]
+
+# Markdown
+
+## Rmarkdown = R + Markdown
+
+- [Markdown](https://www.markdownguide.org/) developed as an easy way to implment `html` style formatting
+
+- Keyboard symbols to genrate basic `html` outputs
+
+## Markdown Examples
+
+```
+_italics_ or *italics*
+
+__bold__ or **bold**
+
+sub~script~
+
+super^script^
+
+```
+$\leadsto$
+
+## Markdown Examples
+
+
+_italics_ or *italics*
+
+__bold__ or **bold**
+
+sub~script~
+
+super^script^
+
+## Markdown Examples
+
+# Code Chunk
+
+## Writing R Code
+
+## Use Chunk Options to Control the Outputs
+
+## Accessing _Other_ Languages
+
+```{r}
+names(knitr::knit_engines$get())
+```
+
+## Setting Engine
+
+```
+knitr::opts_chunk$set(engine.path = list(
+  python = '~/anaconda/bin/python',
+  ruby = '/usr/local/bin/ruby'
+))
+
+```
+
+## A Motivating Example
+
+```{stan, output.var = "stan_example", cache=TRUE}
+parameters {
+  real y[2];
+}
+model {
+  y[1] ~ normal(0, 1);
+  y[2] ~ double_exponential(0, 2);
+}
+```
+
+```{r cache=TRUE}
+library(rstan)
+fit <- sampling(stan_example, cores = 2, iter = 50, refresh = 0)
+print(fit)
+```
+
+<!-- Automating R Markdown
+
+Parameters
+
+-->
+
+---
+
+## Extending RMarkdown
+
+### Table/ Figure Generation
+- `kableExtra`
+- `gt`
+
+### Templates
+- `rticles`
+- `papaja`
+- `markdowntemplates`
+
+### Even More
+- `flexdashboard`
+- `shinydashboard`
 
 ## Other Resources
 
@@ -100,5 +240,21 @@ output:
 
 ### Bookdown
 
+[For Writing Books](https://bookdown.org/)
+
 ### Blogdown
+
+[For writing blogs/ websites](https://bookdown.org/yihui/blogdown/)
+
+## Test Slide
+
+\begin{multicols}{2}
+
+Stuff
+
+\vfill\null
+\columnbreak
+
+Other Stuff
+\end{multicols}
 

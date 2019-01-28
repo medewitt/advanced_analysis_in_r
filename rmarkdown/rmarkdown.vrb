@@ -1,16 +1,41 @@
-\frametitle{Parts of An R Markdown Documents}
-\protect\hypertarget{parts-of-an-r-markdown-documents}{}
+\frametitle{Extending RMarkdown}
+\protect\hypertarget{extending-rmarkdown}{}
 
-\texttt{yml} header instructs to \texttt{pandoc} engine how to build the
-documents
+\begin{block}{Table/ Figure Generation}
 
-\begin{verbatim}
----
-title:
-subtitle:
-author:
-date:
-output:
----
-\end{verbatim}
+\begin{itemize}
+\tightlist
+\item
+  \texttt{kableExtra}
+\item
+  \texttt{gt}
+\end{itemize}
+
+\end{block}
+
+\begin{block}{Templates}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{rticles}
+\item
+  \texttt{papaja}
+\item
+  \texttt{markdowntemplates}
+\end{itemize}
+
+\end{block}
+
+\begin{block}{Even More}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{flexdashboard}
+\item
+  \texttt{shinydashboard}
+\end{itemize}
+
+\end{block}
 

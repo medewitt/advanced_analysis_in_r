@@ -1,2 +1,5 @@
 \beamer@sectionintoc {1}{Why is \texttt {rmarkdown} important?}{2}{0}{1}
-\beamer@sectionintoc {2}{Building Your Documents}{16}{0}{2}
+\beamer@sectionintoc {2}{Building Your Documents}{7}{0}{2}
+\beamer@sectionintoc {3}{\_Y\_et Another \_M\_arkup \_L\_anguage}{9}{0}{3}
+\beamer@sectionintoc {4}{Markdown}{13}{0}{4}
+\beamer@sectionintoc {5}{Code Chunk}{18}{0}{5}

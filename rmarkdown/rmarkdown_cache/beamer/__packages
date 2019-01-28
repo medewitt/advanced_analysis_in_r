@@ -10,3 +10,5 @@ stringr
 forcats
 broom
 here
+StanHeaders
+rstan
