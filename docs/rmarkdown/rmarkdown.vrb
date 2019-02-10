@@ -1,0 +1,33 @@
+\frametitle{Everything in an Rmd File?!}
+\protect\hypertarget{everything-in-an-rmd-file}{}
+
+\begin{block}{Always}
+
+\begin{itemize}
+\tightlist
+\item
+  Final reports/ analysis
+\item
+  Exploratory work
+\end{itemize}
+
+\end{block}
+
+\begin{block}{Except}
+
+\begin{itemize}
+\tightlist
+\item
+  Code outnumbers Prose -\textgreater{} scripts
+\item
+  Can run large scripts from within an Rmd with \texttt{source}
+\end{itemize}
+
+\end{block}
+
+\begin{block}{But\ldots{}}
+
+\texttt{knitr::purl} can make an Rmd into an R file
+
+\end{block}
+

@@ -14,7 +14,7 @@ biblio-style: apalike
 
 
 ```{r echo=FALSE, results='asis'}
-make_doc_links("rmarkdown")
+make_doc_links("rmarkdown", video_link = FALSE)
 ```
 
 <!--

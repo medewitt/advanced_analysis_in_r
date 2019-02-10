@@ -1,30 +1,408 @@
 ---
-title: "R Markdown"
+title: "Advanced Data Analysis in R"
+subtitle: "Advanced `rmarkdown`"
 author: "Michael DeWitt"
-date: "1/14/2019 (Updated `r Sys.Date()`)"
-output: 
-  ioslides_presentation:
-    widescreen: true
-    incremental: true
-    css: ../style.css
+date: "2018-02-09 (Updated `r Sys.Date()`)"
+output:
+  beamer_presentation:
+    keep_tex: false
+    theme: metropolis
+    slide_level: 2
+    incremental: false
+    includes:
+      in_header: head.txt
+fontsize: 12pt
+classoption: compress
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  echo = TRUE,
+  cache = TRUE,
+  warning = FALSE,
+  message = FALSE,
+  fig.align = "center"
+)
+library(tidyverse)
+library(broom)
+library(here)
+set.seed(27)
+options(
+  tibble.print_max = 3,
+  tibble.print_min = 3,
+  width = 55
+)
+theme_set(theme_gray(base_size = 22))
 ```
 
-# Getting Started
+# Why is `rmarkdown` important?
 
-## This is it
 
-- One
+## It's all about communication and documentation!
 
-- Two
+1. We used have notebooks to document our work:
 
-## Testing
+```{r notebook, echo=FALSE, out.width="100px"}
+knitr::include_graphics(here("rmarkdown", "notebook.jpg"))
+```
+
+2. Our reports change change with our data
+
+## Reproducibility
+
+- Tying our analysis to our \alert{output documentation}
+
+- No more of this <https://youtu.be/s3JldKoA0zw>
+
+## Sold? So how do I do it?
+
+- Rmarkdown integrates R and the Markdown language into a single method
+
+- Rmarkdown documents end in `.Rmd` extension
+
+- Can be created from within the [R Studio](https://www.rstudio.com/) Integrated Development Environment (IDE)
+
+## Some technical details...
+
+- `rmarkdown` (and `bookdown`) compile their outputs to [pandoc](https://pandoc.org/)
+- Depending on the output specified
+  - \LaTeX for pdf style outputs (and beamer)
+  - html
+  - html + javascript
+  - epub
+  - ...
+- Specific commands can be issued depending on the output used (\LaTeX and/or html tags)
+
+# Building Your Documents
+
+## Three Components to an Rmarkdown Documents
+
+1. \alert{yml} header than contains metadata and build instructions
+
+2. \alert{Markdown} mark-up conventions
+
+3. \alert{Code chunks} with language and output instructions
+
+# Yet Another Markup Language
+
+## Parts of An R Markdown Documents
+
+`yml` header instructs to `pandoc` engine how to build the documents
+
+```
+---
+title:
+subtitle:
+author:
+abstract:
+date:
+output:
+---
+
+```
+
+## You can access R code from within the yml
+
+Utilising back ticks and the letter "r" you can \alert{include R code into your `yml`}
+
+```
+---
+title: "This is a quick example"
+subtitle: "Just to illustrate a point"
+author: "William Gosset"
+date: "2018-01-23 Updated(`r Sys.Date()`)"
+abstract: "Just a little exloration of things. We looked at `nrow(data)` samples"
+bibliography: my_bib.bib
+output:
+  pdf_document
+---
+
+```
+
+## A Little More About Outputs...
+
+### Rmarkdown Outputs
+- pdf_document
+- word_document
+- html_document
+
+### Presentations
+- io_presentation
+- beamer_presentation
+
+### My Preferred
+- bookdown::pdf_document2^[Almost identical to pdf_output but provides additional control over code chuck references. Requires the `bookdown` package]
+
+# Markdown
+
+## Rmarkdown = R + Markdown
+
+- [Markdown](https://www.markdownguide.org/) developed as an easy way to implement `html` style formatting
+
+- Keyboard symbols to generate basic `html` outputs
+
+- Additionally allows you to interleave plain text with code
+
+## Markdown Examples
+
+```
+_italics_ or *italics*
+
+__bold__ or **bold**
+
+sub~script~
+
+super^script^
+
+```
+$\leadsto$
+
+## Markdown Examples
+
+
+_italics_ or *italics*
+
+__bold__ or **bold**
+
+sub~script~
+
+super^script^
+
+## Markdown Examples
+
+R Studio hosts a ton of great example Rmarkdown reports [here](https://rmarkdown.rstudio.com/gallery.html)
+
+# Code Chunk
+
+## Using Code Chunks
+
+Rmarkdown documents are powerful because of \alert{code chunks}
+
+They can be inserted into a document by `CMD/CTRL + OPTION + I`
+
+Best practice is to \alert{name each chunk} to help with debugging
+
+## Writing R Code
+
+Write code just like you would with any R scripts:
+
+- call libraries 
+- write code 
+- any code is executed and printed as in the console
 
 ```{r}
-1+2
+rnorm(1, 10, 1)
 ```
 
-Yep.
+## Compiling the Documents
+
+\alert{A document will not compile if a chunk has an error!}
+
+
+## Use Chunk Options to Control the Outputs
+
+Some times you don't want everything printed when you compile (knit) the document
+
+Different messages that can be set for \alert{each} code chunk:
+
+- `Echo` - If `false` then \alert{no code is printed}
+- `Warnings` - If `false` \alert{no warning messages} are printed
+- `Messages` - If `false` \alert{no messages} are printed
+- `Include` - If `false` \alert{no echo, no warnings, no messages} printed
+- `Eval` - If `false` the chunk \alert{won't be evaluated}
+- `Error` - If `true` allows chunk to \alert{display an error}
+
+## Use Chunk Global Options
+
+Chunk options can be set \alert{locally} or \alert{globally}
+
+Global options are over-written by local options
+
+Accessing global options
+
+```{r}
+knitr::opts_chunk$set(echo = FALSE, 
+                      warning = FALSE, 
+                      message = FALSE)
+```
+
+
+## Accessing _Other_ Languages
+
+```{r}
+names(knitr::knit_engines$get())
+```
+
+## Setting Engine
+
+Generally you will need specify where the executable file is to run other languages
+
+```
+knitr::opts_chunk$set(engine.path = list(
+  python = '~/anaconda/bin/python',
+  ruby = '/usr/local/bin/ruby'
+))
+
+```
+
+## A Motivating Example
+
+Write my code is `Stan` specifying `output.var = "stan_example"` in the chunk options
+
+```{stan, output.var = "stan_example", cache=TRUE, results='asis'}
+parameters {
+  real y[2];
+}
+model {
+  y[1] ~ normal(0, 1);
+  y[2] ~ double_exponential(0, 2);
+}
+```
+
+## Fit the Model
+
+```{r cache=TRUE}
+library(rstan)
+fit <- sampling(stan_example, cores = 2, 
+                iter = 50, refresh = 0)
+```
+
+## Print the Results Directly
+
+```{r}
+print(fit)
+```
+
+## Controlling Output
+
+Chunk options can also be used to specify
+
+- output size of figure via \alert{fig.out, fig.width, fig.height} 
+
+- captions with \alert{fig.caption}
+
+## Automating Rmarkdowns
+
+An additional `yaml` argument can be passed call `params`
+
+```
+---
+params:
+  team: "Wake Forest"
+  sport: "Football"
+---
+```
+
+## Using the Parameters
+
+The parameters can be be used in other code chunks
+
+```
+data %>% 
+filter(team = params$team, sport = params:sport)
+
+```
+
+And now the code will function for any available team/ sport you specify.
+
+## A Report for Each Team and Sport!
+
+Further, if you desired a standard report for different combinations of team
+
+```
+purrr::pwalk
+```
+
+## Making Basic Tables
+
+The basic way to make a table in R is through the `kable` function from `knitr`
+
+```{r}
+knitr::kable(head(mtcars,4)[,1:3])
+```
+
+## Additional Table Options
+
+The basic way to make a table in R is through the `kable` function from `knitr`
+
+```{r}
+knitr::kable(head(mtcars,4)[,1:3], 
+             caption = "A Basic Table", 
+             col.names = c("One", "Two", "Three"))
+```
+
+
+# Extending RMarkdown
+
+## LaTex
+
+- You can use LaTex extensively 
+
+- This include LaTex templates and cls for control
+
+- Different citation styles
+
+```
+---
+includes:
+  in_header: my_format.tex
+---
+```
+
+
+## Advanced Packages
+
+### Table/ Figure Generation
+- `kableExtra`
+- `gt`
+
+### Templates
+- `rticles`
+- `papaja`
+- `markdowntemplates`
+
+### Even More
+- `flexdashboard`
+- `shinydashboard`
+
+## Other Resources
+
+### Rmarkdown
+[R Studio Cheat Sheets](https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf) for the basic commands
+[Introduction to Rmarkdown](https://rmarkdown.rstudio.com/lesson-1.html) for the basic ideas and getting started
+[R Markdown Definitive Guide](https://bookdown.org/yihui/rmarkdown/) for the details for how Rmarkdown works
+
+### Bookdown
+
+[For Writing Books](https://bookdown.org/)
+
+### Blogdown
+
+[For writing blogs/ websites](https://bookdown.org/yihui/blogdown/)
+
+# Scripts vs Rmds
+
+## Everything in an Rmd File?!
+
+### Always
+- Final reports/ analysis
+- Exploratory work
+
+### Except
+- Code outnumbers Prose -> scripts
+- Can run large scripts from within an Rmd with `source`
+
+### But...
+
+`knitr::purl` can make an Rmd into an R file
+
+
+# Summary
+
+## Key Points
+
+1. Rmarkdown files are a good way to produce reproducible documents
+2. Whatever format you want can be done (but it might be a challenge)
+3. You can work in _multiple_ languages!
+
