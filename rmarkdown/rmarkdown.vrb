@@ -1,41 +1,33 @@
-\frametitle{Extending RMarkdown}
-\protect\hypertarget{extending-rmarkdown}{}
+\frametitle{Everything in an Rmd File?!}
+\protect\hypertarget{everything-in-an-rmd-file}{}
 
-\begin{block}{Table/ Figure Generation}
+\begin{block}{Always}
 
 \begin{itemize}
 \tightlist
 \item
-  \texttt{kableExtra}
+  Final reports/ analysis
 \item
-  \texttt{gt}
+  Exploratory work
 \end{itemize}
 
 \end{block}
 
-\begin{block}{Templates}
+\begin{block}{Except}
 
 \begin{itemize}
 \tightlist
 \item
-  \texttt{rticles}
+  Code outnumbers Prose -\textgreater{} scripts
 \item
-  \texttt{papaja}
-\item
-  \texttt{markdowntemplates}
+  Can run large scripts from within an Rmd with \texttt{source}
 \end{itemize}
 
 \end{block}
 
-\begin{block}{Even More}
+\begin{block}{But\ldots{}}
 
-\begin{itemize}
-\tightlist
-\item
-  \texttt{flexdashboard}
-\item
-  \texttt{shinydashboard}
-\end{itemize}
+\texttt{knitr::purl} can make an Rmd into an R file
 
 \end{block}
 
