@@ -2,9 +2,13 @@
 title: "Rmarkdown Exercises"
 author: "Your Name"
 date: "`r Sys.Date()`"
-output: html_document
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    number_sections: true
+    df_print: paged
 ---
-
 
 ## Markdown Practice
 
@@ -15,4 +19,53 @@ Created a bulleted list that has the name of three fruits.
 Create a numbered list that indicates four vegetables
 
 ## Code Chunks
+
+Create a few items from the normal distribution (hint: `rnorm`)
+
+```{r}
+
+```
+
+## Tables
+
+
+Make a `kable` table for the `mtcars` dataset
+
+### Show the Code
+
+```{r}
+
+```
+
+### Don't show the code!
+
+```{r}
+
+```
+
+
+### Add a footnote with `kableExtra`?
+hint you will need to load the `kableExtra` package using the library command.
+
+
+```{r}
+
+```
+
+
+## Tabsets? {.tabset}
+
+### Maybe this
+
+Add a block quote like using `>`
+
+### Or print a graph
+
+```{r}
+hist(mtcars$mpg, breaks = 30)
+```
+
+## Add Some Code in `python`
+
+But don't evaluate it!
 
