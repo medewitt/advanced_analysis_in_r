@@ -10,9 +10,9 @@ biblio-style: apalike
 ## A Little about resources
 
 
-## Rmarkdown
+### Rmarkdown
 
-## Survey Analysis in R
+### Survey Analysis in R
 
-## Bayesian Modeling and Inference
+### Bayesian Modeling and Inference
 
