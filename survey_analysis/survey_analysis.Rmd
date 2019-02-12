@@ -1,0 +1,47 @@
+---
+title: "Advanced Data Analysis in R"
+subtitle: "Survey Analsis in R"
+author: "Michael DeWitt"
+date: "2018-02-09 (Updated `r Sys.Date()`)"
+output:
+  beamer_presentation:
+    keep_tex: false
+    theme: metropolis
+    slide_level: 2
+    incremental: false
+    includes:
+      in_header: head.txt
+fontsize: 12pt
+classoption: compress
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  echo = TRUE,
+  cache = TRUE,
+  warning = FALSE,
+  message = FALSE,
+  fig.align = "center"
+)
+library(tidyverse)
+library(broom)
+library(here)
+set.seed(27)
+options(
+  tibble.print_max = 3,
+  tibble.print_min = 3,
+  width = 55
+)
+theme_set(theme_gray(base_size = 22))
+```
+
+# Survey Analysis in R
+
+## What makes survey analysis different?
+
+## 
+
+# Introducing the `survey` package
+
+# 
