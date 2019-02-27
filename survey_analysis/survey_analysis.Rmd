@@ -40,8 +40,25 @@ theme_set(theme_gray(base_size = 22))
 
 ## What makes survey analysis different?
 
+Survey analysis is _design based_
+
+
+
+
 ## 
 
 # Introducing the `survey` package
 
+[Thomas Lumley](https://www.stat.auckland.ac.nz/people/tlum005) developed the `survey` package
+
+Initially a port of STATA's `svy` functions following a similar syntax
+
+Expanded....
+
 # 
+
+<!--
+- Postratification and Ranking
+- Trimming Weights
+- Cluster
+-->
