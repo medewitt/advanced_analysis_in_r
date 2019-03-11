@@ -225,8 +225,58 @@ svyby(~score_imp, ~stype, svymean,
 
 ## Performing Regressions
 
+```{r}
+svyglm(score_imp~ meals + avg.ed, svy_api_cluster)
+```
+
+
 # Post-survey corrections
 
+```{r}
+df <- (MASS::survey) %>% na.omit()
+```
+
+```{r}
+prop.table(table(df$Sex))
+```
+
+```{r}
+survey_design_unweighted <- svydesign(ids = ~1, data =df)
+```
+
+
+```{r}
+(gender_dist <- data.frame(Sex = c("Female", "Male"), Freq = round(nrow(df) * c(.55, .45),0)))
+```
+
+```{r}
+survey_design_weighted <- postStratify(survey_design_unweighted, ~Sex, gender_dist)
+```
+
+```{r}
+svymean(~Height, survey_design_unweighted)
+```
+
+```{r}
+svymean(~Height, survey_design_weighted)
+```
+
+
+```{r}
+prop.table(table(df$W.Hnd))
+```
+
+```{r}
+(handed <- data.frame(W.Hnd = c("Left", "Right"), nrow(df) * c(.1, .9)))
+```
+
+```{r}
+survey_design_rake <- rake(survey_design_unweighted, sample.margins = list(~Sex, ~W.Hnd), population.margins = list(gender_dist,handed))
+```
+
+```{r}
+summary(weights(survey_design_rake))
+```
 
 ## References
 
