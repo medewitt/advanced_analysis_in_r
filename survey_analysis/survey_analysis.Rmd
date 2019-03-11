@@ -13,6 +13,7 @@ output:
       in_header: head.txt
 fontsize: 12pt
 classoption: compress
+bibliography: my_bib.bib
 ---
 
 ```{r setup, include = FALSE}
@@ -42,20 +43,192 @@ theme_set(theme_gray(base_size = 22))
 
 Survey analysis is _design based_
 
+Often we talk about _probability or random samples_
+
+These concepts make inferences really nice
 
 
+## Properties of Design Based Surveys
 
-## 
+A quick refresher ^[@lumley_complex_2010]  
+
+>1. Every individual in the population must have a non-zero probability of ending up in the sample ($\pi_i$)  
+>2. The probability of $\pi_i$ must be known for every individual in who does end up in the sample  
+>3. Eevery pair of individuals in the sample must have a non-zero probability of both ending up in the sample ($\pi_{i,j}$ for the pair of individuals (i, j))  
+>4. The probability $\pi_{i,j}$ must be known for every pair that does ebd up in the sample  
+
+
 
 # Introducing the `survey` package
+
+## A little about `survey`
 
 [Thomas Lumley](https://www.stat.auckland.ac.nz/people/tlum005) developed the `survey` package
 
 Initially a port of STATA's `svy` functions following a similar syntax
 
-Expanded....
+Can perform typical types of design based analysis
 
-# 
+- Simple Random  
+- Stratified   
+- Clusters  
+- Multi-stage  
+- Repeated Measures  
+
+## A little about `survey`
+
+Perform post-survey corrections  
+- post-stratification  
+- raking (iterative proportional fitting)  
+- calibration  
+
+And more...!
+
+# Diving into the software...
+
+## Describing your model
+
+The primary argument in `survey` is the [`svydesign`](https://www.rdocumentation.org/packages/survey/versions/3.35-1/topics/svydesign) function
+
+```{r svydesign, eval=FALSE}
+library(survey)
+
+svydesign(ids = to specify clusters (~1 otherwise),
+          probs = Sampling Probabilities if available, 
+          strata = Strata membership if available,
+          fpc = Finite Population Values, 
+          data = Your Data Frame, 
+          nest = T/F if there is nesting within your strata, 
+          weights = Sampling Weights if available,
+          pps = Probability Proportional to Size)
+```
+
+## Quick Note On `survey`
+
+Many of the functions in `survey` utilise R "formula notation"
+
+Indicates the tilde "~" must be used (e.g. `~cluster`)
+
+## But Let's Try An Example
+
+Let's try an example with the `api` dataset that is part of the `survey` package
+
+This data set represents California Academic Performance Index
+
+```{r}
+library(survey)
+library(dplyr)
+data(api)
+```
+
+## Let's Inspect the Data
+
+```{r}
+head(apisrs)
+```
+
+## Specifying the Survey Object (SRS)
+
+This is a simple random sample with finite population correct (since we know the population)
+
+```{r}
+(svy_api_srs <- svydesign(ids = ~1, 
+                          fpc = ~fpc, 
+                          data = apisrs))
+```
+
+
+## Trying With A Different Survey Design (Stratified)
+
+In this case we have a stratified random sample (different school types)
+
+```{r}
+(svy_api_strat <- svydesign(ids= ~1, 
+                            strata = ~stype, 
+                            fpc = ~fpc, 
+                            data = apistrat))
+```
+
+## Trying With A Different Survey Design (Cluster)
+
+Two stage cluster sampling 40 school disticts then five schools within each district
+
+- Stage 1 district cluster with population `fpc1`  
+- Stage 2 district cluster with population `fpc2`
+
+```{r}
+(svy_api_cluster <- svydesign(ids= ~dnum+snum, 
+                              fpc = ~fpc1+fpc2, 
+                              data = apiclus2))
+```
+
+# Analysis with svy objects
+
+## Correct Estimates
+
+`survey` applies correct calculations given the survey design
+
+```{r}
+svymean(~api00, svy_api_cluster)
+```
+
+vs
+
+```{r}
+cbind(mean(apiclus2[["api00"]]), 
+      sd(apiclus2[["api00"]]))
+```
+
+## Survey Functions
+
+Functions in the `survey` package begin with the `svy` prefix
+
+Utilise the formula notation
+
+```{r}
+svyquantile(x = ~api99+api00, 
+            svy_api_srs, 
+            quantile= c(0.25,.75))
+```
+
+## Calculating Contrasts
+
+You can add contrasts with `svycontrast`
+
+Say I wanted to look at the ratio of my high school score to my elementary school score
+
+```{r}
+# Mean
+mean_score <- svyby( ~api99, ~stype, svymean, 
+                       design = svy_api_cluster)
+# Contrast ratio use `quote`
+svycontrast(mean_score, quote(H/E))
+```
+
+## Adding Contrasts to the data
+
+Use the `update` function to add new calculated fields to your survey design object
+
+```{r}
+(svy_api_cluster <- update(svy_api_cluster, 
+                          score_imp = api00/api99))
+```
+
+## Adding Contrasts to the data
+
+Now we can easily perform our analysis
+
+```{r}
+svyby(~score_imp, ~stype, svymean, 
+        design = svy_api_cluster)
+```
+
+## Performing Regressions
+
+# Post-survey corrections
+
+
+## References
 
 <!--
 - Postratification and Ranking
