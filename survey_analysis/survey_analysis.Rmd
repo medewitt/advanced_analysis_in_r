@@ -362,8 +362,29 @@ summary(weights(survey_design_rake))
 
 ## Trim The Weights
 
+There are many methods of trimming weights
+
+I typically use the median $\pm IQR$  
+
+```{r}
+median_wt <- median(weights(survey_design_rake))
+IQR_wt <- IQR(weights(survey_design_rake))
+
+trimmed <-trimWeights(survey_design_rake, 
+            upper = median_wt + IQR_wt,
+            lower = median_wt - IQR_wt)
+```
+
 
 ## Add the Weights to a data set
+
+One trick is to add the survey weights to your data
+
+```{r}
+df_with_wts <- df %>% 
+  add_column(wts = weights(trimmed))
+```
+
 
 ## But I have a zero...
 
