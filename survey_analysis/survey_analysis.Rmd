@@ -1,6 +1,6 @@
 ---
 title: "Advanced Data Analysis in R"
-subtitle: "Survey Analsis in R"
+subtitle: "Survey Analysis in R"
 author: "Michael DeWitt"
 date: "2018-02-09 (Updated `r Sys.Date()`)"
 output:
@@ -11,7 +11,7 @@ output:
     incremental: false
     includes:
       in_header: head.txt
-fontsize: 12pt
+fontsize: 10pt
 classoption: compress
 bibliography: my_bib.bib
 ---
@@ -54,8 +54,8 @@ A quick refresher ^[@lumley_complex_2010]
 
 >1. Every individual in the population must have a non-zero probability of ending up in the sample ($\pi_i$)  
 >2. The probability of $\pi_i$ must be known for every individual in who does end up in the sample  
->3. Eevery pair of individuals in the sample must have a non-zero probability of both ending up in the sample ($\pi_{i,j}$ for the pair of individuals (i, j))  
->4. The probability $\pi_{i,j}$ must be known for every pair that does ebd up in the sample  
+>3. Every pair of individuals in the sample must have a non-zero probability of both ending up in the sample ($\pi_{i,j}$ for the pair of individuals (i, j))  
+>4. The probability $\pi_{i,j}$ must be known for every pair that does end up in the sample  
 
 
 
@@ -67,7 +67,7 @@ A quick refresher ^[@lumley_complex_2010]
 
 Initially a port of STATA's `svy` functions following a similar syntax
 
-Can perform typical types of design based analysis
+Can perform typical types of \alert{design based analysis}
 
 - Simple Random  
 - Stratified   
@@ -111,7 +111,7 @@ Indicates the tilde "~" must be used (e.g. `~cluster`)
 
 ## But Let's Try An Example
 
-Let's try an example with the `api` dataset that is part of the `survey` package
+Let's try an example with the `api` data set that is part of the `survey` package
 
 This data set represents California Academic Performance Index
 
@@ -151,7 +151,7 @@ In this case we have a stratified random sample (different school types)
 
 ## Trying With A Different Survey Design (Cluster)
 
-Two stage cluster sampling 40 school disticts then five schools within each district
+Two stage cluster sampling 40 school districts then five schools within each district
 
 - Stage 1 district cluster with population `fpc1`  
 - Stage 2 district cluster with population `fpc2`
@@ -232,26 +232,69 @@ svyglm(score_imp~ meals + avg.ed, svy_api_cluster)
 
 # Post-survey corrections
 
+## Motivating Example
+
+All about survey error!^[(See @groves_total_2010)]
+
+Non-response can bias our answers
+
+Convenience samples suffer from response bias
+
+## Let's Make Some Fake Data
+
+Initially use data from the `MASS` package [@MASS]
+
 ```{r}
-df <- (MASS::survey) %>% na.omit()
+df <- (MASS::survey) %>% 
+  na.omit()
 ```
+
+Survey responses of 237 Statistics I students at the University of Adelaide
+
+## Let's Examine Some Statistics
+
+Let's say we want to make inferences about a population using this survey. 
+
+But before we do that we want to check the population margins
 
 ```{r}
 prop.table(table(df$Sex))
 ```
 
+## Creating Our Survey Design
+
+First we create our `svydesign` object
+
 ```{r}
 survey_design_unweighted <- svydesign(ids = ~1, data =df)
 ```
 
+## Create Population Data
+
+Then we create data sets to represent the population distribution
 
 ```{r}
-(gender_dist <- data.frame(Sex = c("Female", "Male"), Freq = round(nrow(df) * c(.55, .45),0)))
+(gender_dist <- data.frame(
+  Sex = c("Female", "Male"), 
+  Freq = round(nrow(df) * c(.55, .45),0)))
 ```
 
+## Apply Post-stratification
+
+We can then use the `postStratify` function and supply
+
+- `svydesign` object  
+- The variable we want to post-stratify  
+- The population margins 
+
 ```{r}
-survey_design_weighted <- postStratify(survey_design_unweighted, ~Sex, gender_dist)
+(survey_design_weighted <- postStratify(
+  survey_design_unweighted, 
+  ~Sex, 
+  gender_dist))
 ```
+
+## Different Population Inferences
 
 ```{r}
 svymean(~Height, survey_design_unweighted)
@@ -261,27 +304,76 @@ svymean(~Height, survey_design_unweighted)
 svymean(~Height, survey_design_weighted)
 ```
 
+## More than one variable?
+
+The actual proportion of left-handed peoples is 10%
 
 ```{r}
 prop.table(table(df$W.Hnd))
 ```
 
-```{r}
-(handed <- data.frame(W.Hnd = c("Left", "Right"), nrow(df) * c(.1, .9)))
-```
+## Set Up Additional Population Margins
+
+Our 10% lefties...
 
 ```{r}
-survey_design_rake <- rake(survey_design_unweighted, sample.margins = list(~Sex, ~W.Hnd), population.margins = list(gender_dist,handed))
+(handed <- data.frame(
+  W.Hnd = c("Left", "Right"), 
+  nrow(df) * c(.1, .9)))
 ```
+
+## Enter Raking
+
+Raking or [iterative proportional fitting](https://en.wikipedia.org/wiki/Iterative_proportional_fitting) post-stratifies iteratively on the specified population margins until the new weights stabilise.
+
+
+Useful when the joint distributions are not known
+
+
+User must specify the threshold for weight stabilisation
+
+
+## Now Rake
+
+We can implement raking with the `rake` function by supplying:
+
+- Sample margins (variables to rake)  
+- Population margins  
+
+```{r}
+survey_design_rake <- rake(
+  survey_design_unweighted, 
+  sample.margins = list(~Sex, ~W.Hnd), 
+  population.margins = list(gender_dist,handed))
+```
+
+## Checking your weights
+
+It is important to check your \alert{weights}  
+
+Low representation in surveys leads to \alert{highly variable estimates}  
+
+See this @tesler_analysis_2018 ^[(link here)[https://www.washingtonpost.com/news/monkey-cage/wp/2018/08/17/no-one-third-of-african-americans-dont-support-trump-not-even-close/?utm_term=.a45e7da91344)]]
+
 
 ```{r}
 summary(weights(survey_design_rake))
 ```
 
+## Trim The Weights
+
+
+## Add the Weights to a data set
+
+## But I have a zero...
+
+
+## Post-survey treatment with continuous indicators
+
 ## References
 
 <!--
-- Postratification and Ranking
+- Post-stratification and Ranking
 - Trimming Weights
 - Cluster
 -->
