@@ -105,7 +105,7 @@ svydesign(ids = to specify clusters (~1 otherwise),
 
 ## Quick Note On `survey`
 
-Many of the functions in `survey` utilise R "formula notation"
+Many of the functions in `survey` utilise R \alert{"formula notation"}
 
 Indicates the tilde "~" must be used (e.g. `~cluster`)
 
@@ -124,7 +124,8 @@ data(api)
 ## Let's Inspect the Data
 
 ```{r}
-head(apisrs)
+head(apisrs) %>% 
+  .[,c(1:4)]
 ```
 
 ## Specifying the Survey Object (SRS)
@@ -154,7 +155,8 @@ In this case we have a stratified random sample (different school types)
 Two stage cluster sampling 40 school districts then five schools within each district
 
 - Stage 1 district cluster with population `fpc1`  
-- Stage 2 district cluster with population `fpc2`
+
+- Stage 2 district cluster with population `fpc2`  
 
 ```{r}
 (svy_api_cluster <- svydesign(ids= ~dnum+snum, 
@@ -172,7 +174,7 @@ Two stage cluster sampling 40 school districts then five schools within each dis
 svymean(~api00, svy_api_cluster)
 ```
 
-vs
+_vs_
 
 ```{r}
 cbind(mean(apiclus2[["api00"]]), 
@@ -181,9 +183,9 @@ cbind(mean(apiclus2[["api00"]]),
 
 ## Survey Functions
 
-Functions in the `survey` package begin with the `svy` prefix
+Functions in the `survey` package begin with the `svy` prefix  
 
-Utilise the formula notation
+Utilise the formula notation  
 
 ```{r}
 svyquantile(x = ~api99+api00, 
@@ -225,10 +227,24 @@ svyby(~score_imp, ~stype, svymean,
 
 ## Performing Regressions
 
+All [general linear models](https://www.rdocumentation.org/packages/stats/versions/3.5.2/topics/family) in base R are available in `survey`
+
 ```{r}
 svyglm(score_imp~ meals + avg.ed, svy_api_cluster)
 ```
 
+## Performing Regressions
+
+If you develop your own estimator, you can write that up and apply it as well
+
+## Subsetting
+
+`survey` allows subsetting of the data, but you must use the `subset` function
+
+```{r}
+svyglm(score_imp~ meals + avg.ed, 
+       subset(svy_api_cluster, stype == "E"))
+```
 
 # Post-survey corrections
 
@@ -353,7 +369,7 @@ It is important to check your \alert{weights}
 
 Low representation in surveys leads to \alert{highly variable estimates}  
 
-See this @tesler_analysis_2018 ^[(link here)[https://www.washingtonpost.com/news/monkey-cage/wp/2018/08/17/no-one-third-of-african-americans-dont-support-trump-not-even-close/?utm_term=.a45e7da91344)]]
+See this @tesler_analysis_2018 ^[ Check out: [link here](https://www.washingtonpost.com/news/monkey-cage/wp/2018/08/17/no-one-third-of-african-americans-dont-support-trump-not-even-close/?utm_term=.a45e7da91344)]
 
 
 ```{r}
@@ -388,8 +404,21 @@ df_with_wts <- df %>%
 
 ## But I have a zero...
 
+No amount of post-treatment will help with cell sizes of zero!  
 
-## Post-survey treatment with continuous indicators
+The best option is to collapse cells  
+- Limit inferences  
+- Maintain fidelity of your data -> no response = no data  
+
+## Developments
+
+As always, the ecosystem is developing  
+
+- `srvyr` [package](https://cran.r-project.org/web/packages/srvyr/vignettes/srvyr-vs-survey.html)  
+- <http://asdfree.com/> contains a huge store of available data and `survey` code  
+- And don't forget the [CRAN Task View](https://cran.r-project.org/web/views/OfficialStatistics.html)  
+  - Additional survey analysis packages 
+  - Extensions to calculate other metrics of interest (e.g. GINI coefficients)  
 
 ## References
 
