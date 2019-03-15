@@ -17,13 +17,15 @@ biblio-style: apalike
 make_doc_links("rmarkdown", video_link = FALSE)
 ```
 
-<!--
 
 ## Survey Analysis
 
 ```{r echo=FALSE, results='asis'}
 make_doc_links("survey_analysis")
 ```
+
+<!--
+
 
 ## Bayesian Modeling
 

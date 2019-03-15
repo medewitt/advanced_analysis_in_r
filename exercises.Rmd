@@ -9,9 +9,9 @@ biblio-style: apalike
 
 ## R Markdown
 
-Download the exercises [here](https://raw.githubusercontent.com/medewitt/advanced_analysis_in_r/master/exercises_rmarkdown.Rmd)
+Download the exercises [here](https://github.com/medewitt/advanced_analysis_in_r/blob/master/exercises_rmarkdown.Rmd)
 
 ## Survey
 
-Download the exercises [here]()
+Download the exercises [here](https://github.com/medewitt/advanced_analysis_in_r/blob/master/survey_exercises.Rmd)
 
