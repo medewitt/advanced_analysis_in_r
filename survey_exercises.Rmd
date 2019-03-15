@@ -1,0 +1,260 @@
+---
+  title: "Survey Exercises"
+author: "Your Name"
+date: "`r Sys.Date()`"
+output: 
+  html_document:
+  toc: true
+toc_float: true
+number_sections: true
+df_print: paged
+---
+
+## Getting Started
+
+Ensure that you have `survey` installed on your machine
+
+```{r setup, eval=FALSE}
+
+install.packages(survey)
+
+```
+
+
+## Call The Libraries We Will Need
+
+We'll use these libraries to help us explore the data
+
+```{r}
+library(survey) 
+library(dplyr) 
+```
+
+
+Additionally, the `survey` package comes with some data examples. We will access them through the `data` function
+
+```{r}
+data(api)
+```
+
+
+We can now check our environment and see several new data sets, each representing different survey designs.
+
+
+## Let's Investigate Our Data
+
+WE can use `glimpse` from `dplyr` to help us explore our data
+
+```{r}
+glimpse(apisrs)
+```
+
+And of course the good old fashioned `print`
+
+```{r}
+print(apisrs)
+```
+
+## Specifying the Survey Design Object
+
+The backbone of `survey` is the _survey.design_ object.
+
+### Simple Random
+
+```{r}
+(svy_api_srs <- svydesign(ids = ~1, fpc = ~fpc, data = apisrs)) 
+```
+
+This special class of object helps our `svy` functions know how to calculate appropriate estimates (with the correct corrections for variances).
+
+```{r}
+class(svy_api_srs)
+```
+
+### Stratified Sample
+
+```{r}
+(svy_api_strat <- svydesign(ids= ~1, strata = ~stype, fpc = ~fpc, data = apistrat)) 
+```
+
+
+### Cluster Sample
+
+```{r}
+(svy_api_cluster <- svydesign(ids= ~dnum+snum, fpc = ~fpc1+fpc2, data = apiclus2))
+```
+
+## Performing Calculations with Survey Objects
+
+All of the functions within `survey` being with the prefix `svy` and include the `survey.design` object as an argument. 
+
+We can calculate means:
+
+```{r}
+svymean(~api00, svy_api_cluster)
+```
+
+And just for fun...
+
+```{r}
+cbind(mean(apiclus2[["api00"]]), sd(apiclus2[["api00"]]))
+```
+
+And quantiles
+
+```{r}
+svyquantile(x = ~api99+api00, svy_api_srs, quantile= c(0.25,.75))
+```
+
+Totals
+
+```{r}
+svytotal(x = ~stype, svy_api_srs)
+```
+
+Sometimes we want to do some subgroup analysis. We can use the `svyby` to do an analysis by another variable (like a `group_by` argument)
+
+```{r}
+(mean_score <- svyby( ~api99, ~stype, svymean, design = svy_api_cluster) )
+```
+
+From that, we can then use the `svycontrast` to create a constrast
+
+```{r}
+svycontrast(mean_score, quote(H/E))
+```
+
+
+Or add the new columns directly to the survey object with the `update` function:
+
+```{r}
+(svy_api_cluster <- update(svy_api_cluster, score_imp = api00/api99)) 
+```
+
+## Regression
+
+```{r}
+svyglm(score_imp~ meals + avg.ed, svy_api_cluster)
+```
+
+Additionally, we can perform subsetting using `subset` on the survey design object.
+
+```{r}
+svyglm(score_imp~ meals + avg.ed, 
+       subset(svy_api_cluster, stype == "E")) 
+```
+
+## Post Survey Correction
+
+### Post-stratification
+
+First we need to make some fake data to simulate (really it is real data, we will just do some manipulations on it):
+
+```{r}
+df <- (MASS::survey) %>% 
+  na.omit()
+
+```
+
+Let's check some of our outcomes
+
+```{r}
+prop.table(table(df$Sex)) 
+```
+
+Build our survey object
+
+```{r}
+survey_design_unweighted <- svydesign(ids = ~1, data =df)
+```
+
+We get a warning here, but thats ok. It basically indicates we didn't give the function any weight so everyone gets a weight of 1. 
+
+But now we need to make some information about our population available to our analysis.
+
+```{r}
+(gender_dist <- data.frame( Sex = c("Female", "Male"), Freq = round(nrow(df) * c(.7, .3),0))) 
+```
+
+Now with this information about our population we can perform some post-stratification.
+
+
+```{r}
+(survey_design_weighted <- postStratify( survey_design_unweighted, 
+                                         ~Sex, # Variable to Post-stratify
+                                         gender_dist # Population Info
+                                         )) 
+```
+
+And now we can check out results
+
+```{r}
+svymean(~Height, survey_design_unweighted)
+svymean(~Height, survey_design_weighted)
+```
+
+Adding more variables:
+
+```{r}
+prop.table(table(df$W.Hnd))
+```
+
+More population information!
+
+```{r}
+(handed <- data.frame( W.Hnd = c("Left", "Right"), 
+                       nrow(df) * c(.1, .9)))
+```
+
+### Apply the Rake
+
+```{r}
+survey_design_rake <- rake( survey_design_unweighted, 
+                            sample.margins = list(~Sex, ~W.Hnd), 
+                            population.margins = list(gender_dist,handed))
+
+```
+
+### Check the Weights
+
+```{r}
+summary(weights(survey_design_rake))
+```
+
+### Trim if Needed
+
+There are all kinds of methods to look at weight trimming. Choose one to apply if necessary.
+
+```{r}
+median_wt <- median(weights(survey_design_rake))
+IQR_wt <- IQR(weights(survey_design_rake))
+```
+
+```{r}
+trimmed <-trimWeights(survey_design_rake, 
+                      upper = median_wt + 2*IQR_wt, 
+                      lower = median_wt - 2*IQR_wt)
+```
+
+## Communicating Results
+
+Add the weights back to finalised data set!
+
+```{r}
+df_with_wts <- df %>% add_column(wts = weights(trimmed))
+```
+
+## Pre-view of `srvyr`
+
+Provides some `tidyverse` syntax to `survey`. Read more at <https://cran.r-project.org/web/packages/srvyr/vignettes/srvyr-vs-survey.html>
+
+```{r}
+library(srvyr)
+
+df_with_wts %>% 
+  as_survey_design(ids = 1, wts = wts) %>% 
+  group_by(W.Hnd) %>% 
+  summarise(mu_height = survey_median(Height),
+            mu_height_unwt = unweighted(median(Height)))
+```
+

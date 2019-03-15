@@ -1,0 +1,16 @@
+params_start <- list(team= "Wake Forest", 
+            sport= "Football)
+
+output <- gsub(pattern = " ", "_", unique(params_start$team))
+
+output <- paste0("outputs/", Sys.Date(),"_",output,".pdf")
+
+params <-lapply(dept_key$department, FUN = function(x){c(
+  params_start, list(team = x))}) 
+
+reports <- tibble(output_file = output, params)
+
+library(rmarkdown)
+
+pwalk(.l = reports, 
+      .f = render, input = "my_template_report.Rmd")
