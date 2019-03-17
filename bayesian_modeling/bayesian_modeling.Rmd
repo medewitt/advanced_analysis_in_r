@@ -1,0 +1,152 @@
+---
+title: "Advanced Data Analysis in R"
+subtitle: "Bayesian Modeling in R"
+author: "Michael DeWitt"
+date: "2018-03-17 (Updated `r Sys.Date()`)"
+output:
+  beamer_presentation:
+    keep_tex: false
+    theme: metropolis
+    slide_level: 2
+    incremental: false
+    includes:
+      in_header: head.txt
+fontsize: 10pt
+classoption: compress
+bibliography: my_bib.bib
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  echo = TRUE,
+  cache = TRUE,
+  warning = FALSE,
+  message = FALSE,
+  fig.align = "center"
+)
+library(tidyverse)
+library(broom)
+library(here)
+set.seed(27)
+options(
+  tibble.print_max = 3,
+  tibble.print_min = 3,
+  width = 55
+)
+theme_set(theme_gray(base_size = 22))
+```
+
+# Bayesian Modeling in R
+
+## A Thought Exercise
+
+You are already Bayesian!  
+
+You just didn't know it!
+
+## A Coin
+
+What is the probability a given coin is fair?
+
+## Frequentist
+
+If you didn't answer 100% or 0% you're Bayesian!
+
+## What is Bayes?
+
+- Named after Rev. Thomas Bayes
+
+```{r eval=FALSE}
+knitr::include_graphics(here::here("bayesian_modeling", "figs", "bayes.png"))
+```
+
+
+## Bayes Theorem
+
+## Prior, Likelihood, Posterior Distribution
+
+### Prior
+
+### Likelihood
+
+### Posterior
+
+## Frequentist vs Bayesian Inferences
+
+# Bayesian Workflow
+
+## Doing Bayesian Inferences
+
+## Create A Data Generating Process
+
+Define your data generating process
+
+Generate some fake data from it
+
+## Write Your Model
+
+Test it! Write a model, run it and test it.
+
+## Domain Specific Languages
+
+BUGS  
+JAGS  
+Stan  
+Hand coded samplers 
+
+
+## Enter `brms`
+
+`brms` makes Bayesian Modeling Easy  
+
+Utilises Hamiltonian Monte Carlo  with a No U-Turn Sampler
+
+
+## Specifying a Model in `brms`
+
+## Model Family
+
+## Run the Model
+
+## Posterior Checks
+
+- Convergence  
+  - Trace Plots `tracplot`
+  - Rhat metrics
+  - Effective Sample Size
+  
+- Posterior Predictive Intervals
+  - Was there a good fit between the model and the data
+  
+## Inferences
+
+## Advantages of Bayesian Analysis
+
+- Takes advantage of expert opinion  
+  - Especially helpful with small samples size studies  
+  - Reduces possibility of wildly odd results  
+
+- Easier communications (more intuitive to discuss probabilities)  
+
+- Studies can build on one another
+  - Results from one study can be supplied directly as a prior into a replciation or another study
+
+## Drawbacks of Bayesian Inference
+
+- Not as widely utilised in major publications  
+
+- Computationally intensive 
+
+- Picking a prior  
+
+
+
+
+## References
+
+<!--
+- Post-stratification and Ranking
+- Trimming Weights
+- Cluster
+-->
