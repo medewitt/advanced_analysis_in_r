@@ -3,6 +3,6 @@
 \beamer@sectionintoc {3}{Yet Another Markup Language}{9}{0}{3}
 \beamer@sectionintoc {4}{Markdown}{13}{0}{4}
 \beamer@sectionintoc {5}{Code Chunk}{18}{0}{5}
-\beamer@sectionintoc {6}{Extending RMarkdown}{35}{0}{6}
-\beamer@sectionintoc {7}{Scripts vs Rmds}{39}{0}{7}
-\beamer@sectionintoc {8}{Summary}{41}{0}{8}
+\beamer@sectionintoc {6}{Extending RMarkdown}{36}{0}{6}
+\beamer@sectionintoc {7}{Scripts vs Rmds}{40}{0}{7}
+\beamer@sectionintoc {8}{Summary}{42}{0}{8}

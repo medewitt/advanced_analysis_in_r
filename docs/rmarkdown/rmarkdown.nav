@@ -81,33 +81,35 @@
 \headcommand {\beamer@framepages {33}{33}}
 \headcommand {\slideentry {5}{0}{17}{34/34}{}{0}}
 \headcommand {\beamer@framepages {34}{34}}
-\headcommand {\sectionentry {6}{Extending RMarkdown}{35}{Extending RMarkdown}{0}}
-\headcommand {\beamer@sectionpages {18}{34}}
-\headcommand {\beamer@subsectionpages {18}{34}}
-\headcommand {\slideentry {6}{0}{1}{35/35}{}{0}}
+\headcommand {\slideentry {5}{0}{18}{35/35}{}{0}}
 \headcommand {\beamer@framepages {35}{35}}
-\headcommand {\slideentry {6}{0}{2}{36/36}{}{0}}
+\headcommand {\sectionentry {6}{Extending RMarkdown}{36}{Extending RMarkdown}{0}}
+\headcommand {\beamer@sectionpages {18}{35}}
+\headcommand {\beamer@subsectionpages {18}{35}}
+\headcommand {\slideentry {6}{0}{1}{36/36}{}{0}}
 \headcommand {\beamer@framepages {36}{36}}
-\headcommand {\slideentry {6}{0}{3}{37/37}{}{0}}
+\headcommand {\slideentry {6}{0}{2}{37/37}{}{0}}
 \headcommand {\beamer@framepages {37}{37}}
-\headcommand {\slideentry {6}{0}{4}{38/38}{}{0}}
+\headcommand {\slideentry {6}{0}{3}{38/38}{}{0}}
 \headcommand {\beamer@framepages {38}{38}}
-\headcommand {\sectionentry {7}{Scripts vs Rmds}{39}{Scripts vs Rmds}{0}}
-\headcommand {\beamer@sectionpages {35}{38}}
-\headcommand {\beamer@subsectionpages {35}{38}}
-\headcommand {\slideentry {7}{0}{1}{39/39}{}{0}}
+\headcommand {\slideentry {6}{0}{4}{39/39}{}{0}}
 \headcommand {\beamer@framepages {39}{39}}
-\headcommand {\slideentry {7}{0}{2}{40/40}{}{0}}
+\headcommand {\sectionentry {7}{Scripts vs Rmds}{40}{Scripts vs Rmds}{0}}
+\headcommand {\beamer@sectionpages {36}{39}}
+\headcommand {\beamer@subsectionpages {36}{39}}
+\headcommand {\slideentry {7}{0}{1}{40/40}{}{0}}
 \headcommand {\beamer@framepages {40}{40}}
-\headcommand {\sectionentry {8}{Summary}{41}{Summary}{0}}
-\headcommand {\beamer@sectionpages {39}{40}}
-\headcommand {\beamer@subsectionpages {39}{40}}
-\headcommand {\slideentry {8}{0}{1}{41/41}{}{0}}
+\headcommand {\slideentry {7}{0}{2}{41/41}{}{0}}
 \headcommand {\beamer@framepages {41}{41}}
-\headcommand {\slideentry {8}{0}{2}{42/42}{}{0}}
+\headcommand {\sectionentry {8}{Summary}{42}{Summary}{0}}
+\headcommand {\beamer@sectionpages {40}{41}}
+\headcommand {\beamer@subsectionpages {40}{41}}
+\headcommand {\slideentry {8}{0}{1}{42/42}{}{0}}
 \headcommand {\beamer@framepages {42}{42}}
-\headcommand {\beamer@partpages {1}{42}}
-\headcommand {\beamer@subsectionpages {41}{42}}
-\headcommand {\beamer@sectionpages {41}{42}}
-\headcommand {\beamer@documentpages {42}}
-\headcommand {\def \inserttotalframenumber {34}}
+\headcommand {\slideentry {8}{0}{2}{43/43}{}{0}}
+\headcommand {\beamer@framepages {43}{43}}
+\headcommand {\beamer@partpages {1}{43}}
+\headcommand {\beamer@subsectionpages {42}{43}}
+\headcommand {\beamer@sectionpages {42}{43}}
+\headcommand {\beamer@documentpages {43}}
+\headcommand {\def \inserttotalframenumber {35}}
