@@ -64,13 +64,54 @@ knitr::include_graphics(here::here("bayesian_modeling", "figs", "bayes.png"))
 
 ## Bayes Theorem
 
-## Prior, Likelihood, Posterior Distribution
+Just derrived from identities of probability
 
-### Prior
+$$P(A|B) = \frac{P(A\cap B)}{P(B)}$$
 
-### Likelihood
+$$P(A|B) = \frac{P(B|A)P(A)}{P(B)}$$
 
-### Posterior
+
+# Prior, Likelihood, Posterior Distribution
+
+## Prior
+
+Prior is _subjective_ and represents a range of potential values 
+
+Specified by a distribution  
+
+### Informative
+
+Restricts range of likely values to small range
+
+More informative adds more "weight" to the prior vs the data  
+
+### Noninformative/ Uninformative
+
+Wider range of possibilities  
+
+More closely approximates the Maximum likelihood estimates  
+
+## Likelihood
+
+Likelihood is the distribution for the data generating process  
+
+Examples 
+
+- Poisson process -> poisson likelihood function  
+- Binomial process -> binomial likelihood function 
+- Normal distibution -> normal likelihood function  
+- Ordered categorical -> ordered categorical likelihood function
+
+## Posterior
+
+$$P(A|B) \sim Prior * Likelihood$$
+
+```{r}
+curve(expr = dbeta(x, shape1 = .1, shape2 = 50), from = 0, to = 1)
+curve(expr = dbinom(x, size = 100, prob = .5), from = 0, to = 100)
+curve(expr = dbeta(x,shape1 = .1 + 50, shape2 = 50+50 ), from = 0, to = 1)
+```
+
 
 ## Frequentist vs Bayesian Inferences
 
@@ -140,7 +181,7 @@ Utilises Hamiltonian Monte Carlo  with a No U-Turn Sampler
 
 - Picking a prior  
 
-
+- Heuristics [exist](https://github.com/stan-dev/stan/wiki/Prior-Choice-Recommendations)
 
 
 ## References
