@@ -10,3 +10,7 @@ stringr
 forcats
 broom
 here
+Rcpp
+brms
+tidybayes
+bayesplot
