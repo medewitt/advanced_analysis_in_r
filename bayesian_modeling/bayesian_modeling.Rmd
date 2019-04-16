@@ -32,7 +32,7 @@ set.seed(27)
 options(
   tibble.print_max = 3,
   tibble.print_min = 3,
-  width = 55
+  width = 65
 )
 theme_set(theme_gray(base_size = 22))
 ```
@@ -53,15 +53,6 @@ What is the probability a given coin is fair?
 
 If you didn't answer 100% or 0% you're Bayesian!
 
-## What is Bayes?
-
-- Named after Rev. Thomas Bayes
-
-```{r eval=FALSE}
-knitr::include_graphics(here::here("bayesian_modeling", "figs", "bayes.png"))
-```
-
-
 ## Bayes Theorem
 
 Just derrived from identities of probability
@@ -73,7 +64,7 @@ $$P(A|B) = \frac{P(B|A)P(A)}{P(B)}$$
 
 # Prior, Likelihood, Posterior Distribution
 
-## Prior
+## Prior- What do we know (or not)?
 
 Prior is _subjective_ and represents a range of potential values 
 
@@ -91,7 +82,7 @@ Wider range of possibilities
 
 More closely approximates the Maximum likelihood estimates  
 
-## Likelihood
+## Likelihood - The Data Generating Process
 
 Likelihood is the distribution for the data generating process  
 
@@ -102,14 +93,40 @@ Examples
 - Normal distibution -> normal likelihood function  
 - Ordered categorical -> ordered categorical likelihood function
 
-## Posterior
+## Posterior - What we make inferences on!
 
 $$P(A|B) \sim Prior * Likelihood$$
 
-```{r}
-curve(expr = dbeta(x, shape1 = .1, shape2 = 50), from = 0, to = 1)
-curve(expr = dbinom(x, size = 100, prob = .5), from = 0, to = 100)
-curve(expr = dbeta(x,shape1 = .1 + 50, shape2 = 50+50 ), from = 0, to = 1)
+```{r relationship-prior, echo=FALSE, out.width="70%"}
+example_df <- data.frame(x = seq(0,1, .01)) %>% 
+  mutate(prior = dbeta(x, 1, 1)) %>% 
+  mutate(likelihood = dbinom(x*100, size = 100, prob = .5)) %>%  
+  mutate(posterior = dbeta(x, 50+1, 1 + 50)) %>% 
+  gather(measure, value, -x)
+
+example_df %>% 
+  ggplot(aes(x, value, color = measure))+
+  geom_line()+
+    facet_wrap(~measure, scales = "free_y")+
+  theme(legend.position = "none")
+```
+
+## Strong Priors
+
+Say, I had a stronger prior...
+
+```{r informative-prior, echo=FALSE, out.width="70%"}
+example_df <- data.frame(x = seq(0,1, .01)) %>% 
+  mutate(prior = dbeta(x, 100, 1)) %>% 
+  mutate(likelihood = dbinom(x*100, size = 100, prob = .5)) %>%  
+  mutate(posterior = dbeta(x, 50+100, 1 + 50)) %>% 
+  gather(measure, value, -x)
+
+example_df %>% 
+  ggplot(aes(x, value, color = measure))+
+  geom_line()+
+    facet_wrap(~measure, scales = "free_y")+
+  theme(legend.position = "none")
 ```
 
 
@@ -132,14 +149,23 @@ What is your data generating process?
 ## Write The DGP in Math
 
 ### Likelihood Function
+
 Series of bernouilli trials -> binomial likelihood function  
-$$P(\theta| Data) \sim Binomial(Data, \theta)$$
+
+$$P(y_i = 1|income, gender_i) \sim logit^{-1}(\mu_i)$$
+
+Where,
+
+$$\mu = normal(\beta_{1}*income + \beta_2*gender + intercept, \sigma)$$
 
 ### Prior
 
-Additionally say that we have some data on
+Additionally say that we believe that the impact of these two metrics aren't too strong
 
-$$\theta \sim Beta(1,1)$$
+$$\beta_1 \sim N(0,0.5)$$
+$$\beta_1 \sim N(0,0.5)$$
+
+
 
 ## Simulate Your Data Generating Process
 
@@ -150,26 +176,35 @@ income <- rnorm(n, 0, 1)
 mu <- gender * 1.5 + income * 2
 y <- rbinom(n,1, prob = plogis(mu))
 
-dat <- data.frame(gender =gender, income = income, y = y)
+dat <- data.frame(gender =gender, 
+                  income = income, 
+                  y = y)
 ```
 
 
 ## Domain Specific Languages
 
-BUGS  
-JAGS  
-Stan  
-Hand coded samplers 
+Implementation of Bayesian Data Analysis can be done manually...
 
+But there exist domain specific languages to handle most cases:
+
+- BUGS    
+- JAGS    
+- Stan   
+- Hand coded samplers  
 
 ## Enter `brms`
 
-`brms` makes Bayesian Modeling Easy  
+`brms` makes Bayesian Modeling easy
+
+Compiles traditional R and `lme4` syntax to Stan 
 
 Utilises Hamiltonian Monte Carlo with a No U-Turn Sampler
 
 
 ## Specifying a Model in `brms`
+
+Models can specified in-line or separately using the `bf` function 
 
 ```{r}
 library(brms)
@@ -178,11 +213,15 @@ library(brms)
 
 ## Inspect Priors
 
+The `get_prior` function allows the user to see what priors can be specified  
+
 ```{r}
 get_prior(model, dat, bernoulli())
 ```
 
 ## Specify Priors
+
+Priors can then be specified using the existing [disribution families](https://cran.r-project.org/web/packages/brms/vignettes/brms_families.html)
 
 ```{r}
 my_priors <- c(
@@ -193,7 +232,7 @@ my_priors <- c(
 
 ## Model Family
 
-```{r}
+```{r fit-model, cache=TRUE}
 fit <- brm(model, my_priors,
            data =  dat, 
            family = bernoulli(), 
@@ -204,7 +243,7 @@ fit <- brm(model, my_priors,
 ## Posterior Checks
 
 - Convergence  
-  - Trace Plots `tracplot`
+  - Trace Plots `mcmc_trace`
   - Rhat metrics
   - Effective Sample Size
   
@@ -213,15 +252,42 @@ fit <- brm(model, my_priors,
   
 ## So Let's Check
 
-```{r out.width="400px"}
+With trace plots we are looking to ensure that there are not divergent chains
+
+```{r out.width="50%"}
 library(tidybayes)
 library(bayesplot)
 mcmc_trace(as.matrix(fit))
 ```
 
+## Rhat and Effective Sample Size
 
-  
+Rhat is a measure of chain mising (target < 1.01)
+
+```{r}
+summary(fit)
+```
+
+## Convergence of Parameters
+
+Here looking for the centeredness of our parameters  
+
+```{r out.width="50%"}
+pairs(fit)
+```
+
+
+## Posterior Predictive Checks
+
+Not covered here, but more common when predicting continuous variables
+
+Assess how well your model can predict the data that generated it.
+
+See [this tutorial for details](https://mc-stan.org/bayesplot/)
+
 ## Inferences
+
+Now that we have validated our fit, we can make inferences
 
 ```{r}
 summary(fit)
