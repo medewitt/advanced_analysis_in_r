@@ -15,3 +15,6 @@ Download the exercises [here](https://github.com/medewitt/advanced_analysis_in_r
 
 Download the exercises [here](https://github.com/medewitt/advanced_analysis_in_r/blob/master/survey_exercises.Rmd)
 
+## Bayesian Modeling
+
+Download the exercises [here](https://github.com/medewitt/advanced_analysis_in_r/blob/master/exercises_bayes.Rmd)
