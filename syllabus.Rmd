@@ -5,13 +5,10 @@ title: "Syllabus"
 ```{r, child="_setup.Rmd"}
 ```
 
-This is where you could put your syllabus.
+Ok, so in reality there isn't a syllabus, but there is a **Code of Conduct** for this series. 
 
-```{r}
-grades <- tribble(
-  ~Item, ~Weight,
-  "Exams", "10%",
-  "HW", "90%"
-)
-```
 
+
+This workshop (and presenter) is dedicated to providing a harassment-free workshop experience for everyone, regardless of gender, gender identity and expression, age, sexual orientation, disability, physical appearance, body size, race, ethnicity, or religion (or lack thereof). We do not tolerate harassment of workshop participants in any form.
+
+Other than that, the goal is to learn a lot and have fun.  

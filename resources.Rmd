@@ -9,10 +9,101 @@ biblio-style: apalike
 
 ## A Little about resources
 
+These are just a few additional resources on the topics that are a part of this workshop series. 
 
-### Rmarkdown
+## R Markdown
 
-### Survey Analysis in R
+### Guides
 
-### Bayesian Modeling and Inference
+[R Markdown: The Definitive Guide](https://bookdown.org/yihui/rmarkdown/) for the definititve guide on all things R Markdown related. This is the most comphrensive resource for how to use R Markdown.  
 
+[R Markdown Cheat Sheet](https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf) for a quick overview of the basic commands/ functions in R Markdown.  
+
+[Bookdown](https://bookdown.org/yihui/bookdown/) is a package that extends R Markdown that makes publishing books in nearly any format easy (epub, LaTex, html, ...).  
+
+[Blogdown](https://bookdown.org/yihui/blogdown/) is a package that is devoted to making static websites (Everyone should have one now...).
+
+### Document Templates
+
+The follow packages provide nice document and even package templates for working with R Markdown
+
+`rticles` for common statistical journal template (ASA, AEA, ACS, Springer, JOSS, etc)  
+
+`memor` for making custom memos   
+
+`tufte` for Tufte inspired document handbooks and templates  
+
+`linl` linl is not letter, a template for writing letters using R Markdown
+
+`vitae` for making CVs and resumes in R Markdown   
+
+`papaja`available on github at <https://github.com/crsh/papaja> for making APA 6th Ed compliant documents 
+
+`Sasmarkdown` to facilitate using the SAS programming language in R Markdown  
+
+### Helper Tools
+
+`citr` is an add-in to act as a citation add in helper  
+
+`tinytex` is a package that will help with LaTex installations. I strongly recommend it. Follow the installation guide at <https://yihui.name/tinytex/>  
+ 
+
+## Survey Analysis in R
+
+### Literature 
+
+Thomas Lumley's [_Complex Surveys: A Guide to Analysis Using R_](https://www.amazon.com/Complex-Surveys-Guide-Analysis-Using/dp/0470284307)   is the book for the package upon which this workshop is based.  
+
+
+Shanon Loh's [_Sampling: Design and Analysis_](https://www.amazon.com/Sampling-Analysis-Advanced-Sharon-Lohr/dp/0495105279) is an excellent resource for survey design and inference. The results from which can be found reproduced in R in the `SDaA` package.  
+
+### Data 
+
+[Analyze Survey Data for Free](http://asdfree.com/prerequisites.html) provides a compendium to different data sets and their associated designs.  
+
+### Packages  
+
+`survey` which is the implmentation of Thomas Lumley's book  
+
+`haven` for reading in SPSS/ SAS/ STATA files  
+
+`foreign` for reading in other files that `haven` might choke on.  
+
+More at the [Official Statistics & Survey Methodology Taskview](https://cran.r-project.org/web/views/OfficialStatistics.html)
+
+
+## Bayesian Modeling and Inference
+
+### Literature
+
+Gelman and Hill's [_Data Analysis Using Regression Modeling and Multilevel Models_](https://www.amazon.com/Analysis-Regression-Multilevel-Hierarchical-Models/dp/052168689X) often called "ARM"  
+
+Gelman et al's [_Bayesian Data Analysis_](https://www.amazon.com/Bayesian-Analysis-Chapman-Statistical-Science/dp/1439840954) often called "BDA"  
+
+McElreath's [_Statistical Rethinking_](https://www.amazon.com/Statistical-Rethinking-Bayesian-Examples-Chapman/dp/1482253445)  
+
+### Worked Problems
+
+[Bayesian Data Analysis](http://www.stat.columbia.edu/~gelman/book/)  
+
+[ARM](http://www.stat.columbia.edu/~gelman/arm/)  
+
+[Statistical Rethinking with brms, ggplot2, and the tidyverse](https://bookdown.org/ajkurz/Statistical_Rethinking_recoded/) for _Statistical Rethinking_ re=implmented in these packages and paradigms. 
+
+[A Guide to Plotting Partial Pooling Estimators](https://www.tjmahr.com/plotting-partial-pooling-in-mixed-effects-models/)  
+
+[Jim Savage's Website](http://khakieconomics.github.io/) for a series of great examples on using Bayesian Inference on problem solving.  
+
+### Visuals
+
+[This video](http://elevanth.org/blog/2017/11/28/build-a-better-markov-chain/) explaining how the different sampling algorithms work (e.g. Hamiltonian, Gibbs, Metropolis Hastings)
+
+### Packages
+
+`rstan` for a lower level interface with Stan where you write the Stan code and pass it to Stan via the `rstan` package.  
+
+`rstanarm` for some basic, precompiled models in Stan where come basic models have already been created and optimised in Stan and the interfaces only through R with `lme4` syntax.  
+
+`brms` for a comphrensive interface with Bayesian modelling with `lme4` syntax.
+
+`rjags` for interfacing with the Jags Bayesian inference engine (Gibbs Sampling).

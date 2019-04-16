@@ -11,7 +11,7 @@ make_doc_links <-function(document_name, video_link = TRUE){
 **Files**
 [<i class="fa fa-file icon-4x"></i>]({repo_url}/blob/master/{document_name}/{document_name}.pdf)
 [<i class="fab fa-r-project"></i>]({repo_url}/blob/master/{document_name}/{document_name}.Rmd)
-[<i class="fa fa-play-circle"></i>](https://vimeopro.com/user39539526/data-analysis-in-r)
+[<i class="fa fa-play-circle"></i>](https://vimeopro.com/user39539526/advanced-data-analysis-in-r)
 </div>
 <br>
 <hr style="border-top: dotted 2px #9E7E38;" />')

@@ -19,6 +19,8 @@ make_doc_links("rmarkdown", video_link = FALSE)
 
 
 ## Survey Analysis
+### tldr:
+>This workshop gives an overview of survey analysis in R with focus on using the `survey` package. Survey analysis is typically challenging as there is often a design effect to standard errors when making inferences and quantifying uncertainty in survey results.
 
 ```{r echo=FALSE, results='asis'}
 make_doc_links("survey_analysis")
