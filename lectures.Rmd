@@ -24,8 +24,6 @@ make_doc_links("rmarkdown", video_link = FALSE)
 make_doc_links("survey_analysis")
 ```
 
-<!--
-
 
 ## Bayesian Modeling
 
@@ -33,4 +31,3 @@ make_doc_links("survey_analysis")
 make_doc_links("bayesian_modeling")
 ```
 
--->
