@@ -29,6 +29,9 @@ make_doc_links("survey_analysis")
 
 ## Bayesian Modeling
 
+### tldr:
+>This workshop gives an overview of Bayesian model with a focus on applied modeling using the `brms` package. Some knowledge about modeling in R is assumed in this workshop.
+
 ```{r echo=FALSE, results='asis'}
 make_doc_links("bayesian_modeling")
 ```
