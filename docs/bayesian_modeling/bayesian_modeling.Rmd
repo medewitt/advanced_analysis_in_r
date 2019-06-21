@@ -12,7 +12,8 @@ output:
     includes:
       in_header: head.txt
 fontsize: 10pt
-classoption: compress
+#classoption: compress
+classoption: "aspectratio=169"
 bibliography: my_bib.bib
 ---
 

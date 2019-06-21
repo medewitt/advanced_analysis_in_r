@@ -105,7 +105,7 @@ x1 <- rnorm(n)
 x2 <- rnorm(n)
 
 y <- vector(length = n)
-y[1] <- 5*x1[i] + 2*x2[i]
+y[1] <- 5*x1[1] + 2*x2[1]
 for(i in 2:n){
   y[i] <-5*x1[i] + y[i-1] - 2*x2[i]
 }
@@ -173,6 +173,6 @@ fit_1 <- brm(y ~ (1 + time | person_id) + time + exposure, data=data_1)
 And see if we can recover our effect.
 
 ```{r}
-
+summary(fit_1)
 ```
 

@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>Bayesian Modeling Exercises</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-110093032-1"></script>
+<script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      
+      gtag('config', 'UA-110093032-1');
+      </script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Advanced Analysis in R</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="syllabus.html">
+    <span class="fa fa-handshake"></span>
+     
+    Syllabus
+  </a>
+</li>
+<li>
+  <a href="lectures.html">
+    <span class="fa fa-book"></span>
+     
+    Lectures
+  </a>
+</li>
+<li>
+  <a href="exercises.html">
+    <span class="fa fa-paper-plane"></span>
+     
+    Exercises
+  </a>
+</li>
+<li>
+  <a href="resources.html">
+    <span class="fa fa-hand-paper"></span>
+     
+    Resources
+  </a>
+</li>
+<li>
+  <a href="https://michaeldewittjr.com">
+    <span class="fa fa-folder"></span>
+     
+    Home
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Bayesian Modeling Exercises</h1>
+
+</div>
+
+
+<div id="bayesian-workflow" class="section level2">
+<h2>Bayesian Workflow</h2>
+<ol style="list-style-type: decimal">
+<li>Develop a Data Generating Process (DGP)<br />
+</li>
+<li>Generate <em>fake</em> data from DGP</li>
+<li>Fit a model to the DGP</li>
+<li>Perform posterior checks</li>
+<li>Sensitivity analysis if required</li>
+<li>Fit your real data!</li>
+<li>Make inferences on your real data</li>
+</ol>
+</div>
+<div id="specifying-a-few-distributions" class="section level2">
+<h2>Specifying a Few Distributions</h2>
+<div id="the-binomial-trial" class="section level3">
+<h3>The Binomial Trial</h3>
+<pre class="r"><code>n &lt;- 1000
+
+gender &lt;-rep(x = 0:1, length.out = n)
+
+income &lt;- rnorm(n, 0, 1)
+
+mu &lt;- gender * 1.5 + income * 2</code></pre>
+<p>The we make it random!</p>
+<pre class="r"><code>y &lt;- rbinom(n,1, prob = plogis(mu))
+
+dat &lt;- data.frame(gender =gender, 
+                  income = income, 
+                  y = y)</code></pre>
+<p>Then we can create a model using <code>brms</code></p>
+<pre class="r"><code>library(brms)</code></pre>
+<pre><code>## Loading required package: Rcpp</code></pre>
+<pre><code>## Registered S3 method overwritten by &#39;xts&#39;:
+##   method     from
+##   as.zoo.xts zoo</code></pre>
+<pre><code>## Loading &#39;brms&#39; package (version 2.9.0). Useful instructions
+## can be found by typing help(&#39;brms&#39;). A more detailed introduction
+## to the package is available through vignette(&#39;brms_overview&#39;).</code></pre>
+<pre class="r"><code>(model &lt;- bf(y ~ gender + income))</code></pre>
+<pre><code>## y ~ gender + income</code></pre>
+<p>We can treat <code>model</code> just like any other R object. Additionally, (and this is the handy part of doing it this way), we can see what priors are available with the <code>get_prior</code> function</p>
+<pre class="r"><code>get_prior(model, dat, bernoulli())</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["prior"],"name":[1],"type":["chr"],"align":["left"]},{"label":["class"],"name":[2],"type":["chr"],"align":["left"]},{"label":["coef"],"name":[3],"type":["chr"],"align":["left"]},{"label":["group"],"name":[4],"type":["chr"],"align":["left"]},{"label":["resp"],"name":[5],"type":["chr"],"align":["left"]},{"label":["dpar"],"name":[6],"type":["chr"],"align":["left"]},{"label":["nlpar"],"name":[7],"type":["chr"],"align":["left"]},{"label":["bound"],"name":[8],"type":["chr"],"align":["left"]}],"data":[{"1":"","2":"b","3":"","4":"","5":"","6":"","7":"","8":"","_rn_":"1"},{"1":"","2":"b","3":"gender","4":"","5":"","6":"","7":"","8":"","_rn_":"2"},{"1":"","2":"b","3":"income","4":"","5":"","6":"","7":"","8":"","_rn_":"3"},{"1":"student_t(3, 0, 10)","2":"Intercept","3":"","4":"","5":"","6":"","7":"","8":"","_rn_":"4"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p>We can then set our priors</p>
+<pre class="r"><code>my_priors &lt;- c(
+  prior(normal(0, 0.5), class = &quot;b&quot;, coef = &quot;gender&quot;),
+  prior(normal(0, 0.5), class = &quot;b&quot;, coef = &quot;income&quot;))</code></pre>
+<p>And fit our new model!</p>
+<pre class="r"><code>fit_binom &lt;- brm(model, my_priors,
+           data =  dat,
+           family = bernoulli(), 
+           inits = 1000, cores = 2, # These are important! 
+           chains = 2, seed = 1234, refresh = 0) # Setting a seet is important for reprocibility</code></pre>
+<pre><code>## Compiling the C++ model</code></pre>
+<pre><code>## Start sampling</code></pre>
+<p>Other features <code>adapt_delta</code> and <code>max_treedepth</code> may need to be altered depending on convergence.</p>
+</div>
+<div id="diagnostics" class="section level3">
+<h3>Diagnostics</h3>
+<p>We check our trace plots</p>
+<pre class="r"><code>library(tidybayes)
+library(bayesplot)</code></pre>
+<pre><code>## This is bayesplot version 1.7.0</code></pre>
+<pre><code>## - Online documentation and vignettes at mc-stan.org/bayesplot</code></pre>
+<pre><code>## - bayesplot theme set to bayesplot::theme_default()</code></pre>
+<pre><code>##    * Does _not_ affect other ggplot2 plots</code></pre>
+<pre><code>##    * See ?bayesplot_theme_set for details on theme setting</code></pre>
+<pre class="r"><code>mcmc_trace(as.matrix(fit_binom))</code></pre>
+<p><img src="exercises_bayes_files/figure-html/trace-plot-1.png" width="672" /></p>
+<p>And the centering of our parameters</p>
+<pre class="r"><code>pairs(fit_binom)</code></pre>
+<p><img src="exercises_bayes_files/figure-html/pairs-plot-1.png" width="672" /></p>
+<p>And our course our values</p>
+<pre class="r"><code>summary(fit_binom)</code></pre>
+<pre><code>##  Family: bernoulli 
+##   Links: mu = logit 
+## Formula: y ~ gender + income 
+##    Data: dat (Number of observations: 1000) 
+## Samples: 2 chains, each with iter = 2000; warmup = 1000; thin = 1;
+##          total post-warmup samples = 2000
+## 
+## Population-Level Effects: 
+##           Estimate Est.Error l-95% CI u-95% CI Eff.Sample Rhat
+## Intercept     0.04      0.10    -0.15     0.25       2116 1.00
+## gender        1.32      0.16     1.02     1.64       1579 1.00
+## income        1.75      0.11     1.55     1.99       1352 1.00
+## 
+## Samples were drawn using sampling(NUTS). For each parameter, Eff.Sample 
+## is a crude measure of effective sample size, and Rhat is the potential 
+## scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
+</div>
+<div id="time-series-in-brms" class="section level3">
+<h3>Time Series in <code>brms</code></h3>
+<p>Let’s make a simple time series data set</p>
+<pre class="r"><code>n &lt;- 100
+
+x1 &lt;- rnorm(n)
+x2 &lt;- rnorm(n)
+
+y &lt;- vector(length = n)
+y[1] &lt;- 5*x1[1] + 2*x2[1]
+for(i in 2:n){
+  y[i] &lt;-5*x1[i] + y[i-1] - 2*x2[i]
+}
+
+ts_dat &lt;- data.frame(x1, x2, y)</code></pre>
+<p>Now we have to specify an additional term.</p>
+<pre class="r"><code>library(brms)
+fit_ar1 &lt;- brm(y ~ x1 + x2,
+           data =  ts_dat,
+           autocor = cor_ar(p = 1), # Tell me more?
+           inits = 1000, cores = 2, # These are important! 
+           chains = 2, seed = 1234, refresh = 0) # Setting a seet is important for reprocibility</code></pre>
+<pre><code>## Compiling the C++ model</code></pre>
+<pre><code>## Start sampling</code></pre>
+<p>A PPC</p>
+<pre class="r"><code>library(bayesplot)
+
+color_scheme_set(&quot;darkgray&quot;)
+pp_check(fit_ar1)</code></pre>
+<pre><code>## Using 10 posterior samples for ppc type &#39;dens_overlay&#39; by default.</code></pre>
+<p><img src="exercises_bayes_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<pre class="r"><code>summary(fit_ar1)</code></pre>
+<pre><code>##  Family: gaussian 
+##   Links: mu = identity; sigma = identity 
+## Formula: y ~ x1 + x2 
+##    Data: ts_dat (Number of observations: 100) 
+## Samples: 2 chains, each with iter = 2000; warmup = 1000; thin = 1;
+##          total post-warmup samples = 2000
+## 
+## Correlation Structures:
+##       Estimate Est.Error l-95% CI u-95% CI Eff.Sample Rhat
+## ar[1]     0.99      0.00     0.98     1.00       2028 1.00
+## 
+## Population-Level Effects: 
+##           Estimate Est.Error l-95% CI u-95% CI Eff.Sample Rhat
+## Intercept     1.70      3.31    -4.86     8.39       1829 1.00
+## x1            2.44      0.24     1.97     2.92       1545 1.00
+## x2           -1.18      0.28    -1.74    -0.63       1937 1.00
+## 
+## Family Specific Parameters: 
+##       Estimate Est.Error l-95% CI u-95% CI Eff.Sample Rhat
+## sigma     3.36      0.26     2.92     3.90       1854 1.00
+## 
+## Samples were drawn using sampling(NUTS). For each parameter, Eff.Sample 
+## is a crude measure of effective sample size, and Rhat is the potential 
+## scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
+</div>
+</div>
+<div id="clinical-trial" class="section level2">
+<h2>Clinical Trial</h2>
+<p>Suppose we have some people in the experiment and we give them some kind of treatment. Then we measure the impact over time. See <a href="https://michaeldewittjr.com/dewitt_blog/posts/2018-09-24-the-power-of-fake-data-simulations/">here</a> for more details.</p>
+<pre class="r"><code>J &lt;- 50  # number of people in the experiment
+N_per_person &lt;- 10 # number of measurements per person
+person_id &lt;- rep(1:J, rep(N_per_person, J))
+index &lt;- rep(1:N_per_person, J) 
+time &lt;- index - 1  # time of measurements, from 0 to 9
+N &lt;- length(person_id)
+a &lt;- rnorm(J, 0, 1)
+b &lt;- rnorm(J, 1, 1)
+theta &lt;- 1
+sigma_y &lt;- 1
+z &lt;- sample(rep(c(0,1), J/2), J)
+y_pred &lt;- a[person_id] + b[person_id]*time + theta*z[person_id]*time
+y &lt;- rnorm(N, y_pred, sigma_y)
+z_full &lt;- z[person_id]
+exposure &lt;- z_full*time
+data_1 &lt;- data.frame(time, person_id, exposure, y)</code></pre>
+<p>And then we can fit the data</p>
+<pre class="r"><code>fit_1 &lt;- brm(y ~ (1 + time | person_id) + time + exposure, data=data_1)</code></pre>
+<pre><code>## Compiling the C++ model</code></pre>
+<pre><code>## Start sampling</code></pre>
+<pre><code>## 
+## SAMPLING FOR MODEL &#39;54e5f1c0597543b321facd183e399c95&#39; NOW (CHAIN 1).
+## Chain 1: 
+## Chain 1: Gradient evaluation took 0 seconds
+## Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0 seconds.
+## Chain 1: Adjust your expectations accordingly!
+## Chain 1: 
+## Chain 1: 
+## Chain 1: Iteration:    1 / 2000 [  0%]  (Warmup)
+## Chain 1: Iteration:  200 / 2000 [ 10%]  (Warmup)
+## Chain 1: Iteration:  400 / 2000 [ 20%]  (Warmup)
+## Chain 1: Iteration:  600 / 2000 [ 30%]  (Warmup)
+## Chain 1: Iteration:  800 / 2000 [ 40%]  (Warmup)
+## Chain 1: Iteration: 1000 / 2000 [ 50%]  (Warmup)
+## Chain 1: Iteration: 1001 / 2000 [ 50%]  (Sampling)
+## Chain 1: Iteration: 1200 / 2000 [ 60%]  (Sampling)
+## Chain 1: Iteration: 1400 / 2000 [ 70%]  (Sampling)
+## Chain 1: Iteration: 1600 / 2000 [ 80%]  (Sampling)
+## Chain 1: Iteration: 1800 / 2000 [ 90%]  (Sampling)
+## Chain 1: Iteration: 2000 / 2000 [100%]  (Sampling)
+## Chain 1: 
+## Chain 1:  Elapsed Time: 6.926 seconds (Warm-up)
+## Chain 1:                6.003 seconds (Sampling)
+## Chain 1:                12.929 seconds (Total)
+## Chain 1: 
+## 
+## SAMPLING FOR MODEL &#39;54e5f1c0597543b321facd183e399c95&#39; NOW (CHAIN 2).
+## Chain 2: 
+## Chain 2: Gradient evaluation took 0 seconds
+## Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 0 seconds.
+## Chain 2: Adjust your expectations accordingly!
+## Chain 2: 
+## Chain 2: 
+## Chain 2: Iteration:    1 / 2000 [  0%]  (Warmup)
+## Chain 2: Iteration:  200 / 2000 [ 10%]  (Warmup)
+## Chain 2: Iteration:  400 / 2000 [ 20%]  (Warmup)
+## Chain 2: Iteration:  600 / 2000 [ 30%]  (Warmup)
+## Chain 2: Iteration:  800 / 2000 [ 40%]  (Warmup)
+## Chain 2: Iteration: 1000 / 2000 [ 50%]  (Warmup)
+## Chain 2: Iteration: 1001 / 2000 [ 50%]  (Sampling)
+## Chain 2: Iteration: 1200 / 2000 [ 60%]  (Sampling)
+## Chain 2: Iteration: 1400 / 2000 [ 70%]  (Sampling)
+## Chain 2: Iteration: 1600 / 2000 [ 80%]  (Sampling)
+## Chain 2: Iteration: 1800 / 2000 [ 90%]  (Sampling)
+## Chain 2: Iteration: 2000 / 2000 [100%]  (Sampling)
+## Chain 2: 
+## Chain 2:  Elapsed Time: 6.969 seconds (Warm-up)
+## Chain 2:                6.339 seconds (Sampling)
+## Chain 2:                13.308 seconds (Total)
+## Chain 2: 
+## 
+## SAMPLING FOR MODEL &#39;54e5f1c0597543b321facd183e399c95&#39; NOW (CHAIN 3).
+## Chain 3: 
+## Chain 3: Gradient evaluation took 0 seconds
+## Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 0 seconds.
+## Chain 3: Adjust your expectations accordingly!
+## Chain 3: 
+## Chain 3: 
+## Chain 3: Iteration:    1 / 2000 [  0%]  (Warmup)
+## Chain 3: Iteration:  200 / 2000 [ 10%]  (Warmup)
+## Chain 3: Iteration:  400 / 2000 [ 20%]  (Warmup)
+## Chain 3: Iteration:  600 / 2000 [ 30%]  (Warmup)
+## Chain 3: Iteration:  800 / 2000 [ 40%]  (Warmup)
+## Chain 3: Iteration: 1000 / 2000 [ 50%]  (Warmup)
+## Chain 3: Iteration: 1001 / 2000 [ 50%]  (Sampling)
+## Chain 3: Iteration: 1200 / 2000 [ 60%]  (Sampling)
+## Chain 3: Iteration: 1400 / 2000 [ 70%]  (Sampling)
+## Chain 3: Iteration: 1600 / 2000 [ 80%]  (Sampling)
+## Chain 3: Iteration: 1800 / 2000 [ 90%]  (Sampling)
+## Chain 3: Iteration: 2000 / 2000 [100%]  (Sampling)
+## Chain 3: 
+## Chain 3:  Elapsed Time: 6.639 seconds (Warm-up)
+## Chain 3:                6.191 seconds (Sampling)
+## Chain 3:                12.83 seconds (Total)
+## Chain 3: 
+## 
+## SAMPLING FOR MODEL &#39;54e5f1c0597543b321facd183e399c95&#39; NOW (CHAIN 4).
+## Chain 4: 
+## Chain 4: Gradient evaluation took 0 seconds
+## Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 0 seconds.
+## Chain 4: Adjust your expectations accordingly!
+## Chain 4: 
+## Chain 4: 
+## Chain 4: Iteration:    1 / 2000 [  0%]  (Warmup)
+## Chain 4: Iteration:  200 / 2000 [ 10%]  (Warmup)
+## Chain 4: Iteration:  400 / 2000 [ 20%]  (Warmup)
+## Chain 4: Iteration:  600 / 2000 [ 30%]  (Warmup)
+## Chain 4: Iteration:  800 / 2000 [ 40%]  (Warmup)
+## Chain 4: Iteration: 1000 / 2000 [ 50%]  (Warmup)
+## Chain 4: Iteration: 1001 / 2000 [ 50%]  (Sampling)
+## Chain 4: Iteration: 1200 / 2000 [ 60%]  (Sampling)
+## Chain 4: Iteration: 1400 / 2000 [ 70%]  (Sampling)
+## Chain 4: Iteration: 1600 / 2000 [ 80%]  (Sampling)
+## Chain 4: Iteration: 1800 / 2000 [ 90%]  (Sampling)
+## Chain 4: Iteration: 2000 / 2000 [100%]  (Sampling)
+## Chain 4: 
+## Chain 4:  Elapsed Time: 6.734 seconds (Warm-up)
+## Chain 4:                6.121 seconds (Sampling)
+## Chain 4:                12.855 seconds (Total)
+## Chain 4:</code></pre>
+<p>And see if we can recover our effect.</p>
+<pre class="r"><code>summary(fit_1)</code></pre>
+<pre><code>##  Family: gaussian 
+##   Links: mu = identity; sigma = identity 
+## Formula: y ~ (1 + time | person_id) + time + exposure 
+##    Data: data_1 (Number of observations: 500) 
+## Samples: 4 chains, each with iter = 2000; warmup = 1000; thin = 1;
+##          total post-warmup samples = 4000
+## 
+## Group-Level Effects: 
+## ~person_id (Number of levels: 50) 
+##                     Estimate Est.Error l-95% CI u-95% CI Eff.Sample Rhat
+## sd(Intercept)           1.20      0.16     0.92     1.55       1211 1.00
+## sd(time)                1.09      0.12     0.89     1.36        962 1.00
+## cor(Intercept,time)     0.07      0.16    -0.25     0.38        487 1.01
+## 
+## Population-Level Effects: 
+##           Estimate Est.Error l-95% CI u-95% CI Eff.Sample Rhat
+## Intercept    -0.00      0.19    -0.38     0.37       1936 1.00
+## time          1.10      0.22     0.66     1.53        547 1.01
+## exposure      0.88      0.31     0.27     1.47        486 1.00
+## 
+## Family Specific Parameters: 
+##       Estimate Est.Error l-95% CI u-95% CI Eff.Sample Rhat
+## sigma     0.99      0.03     0.93     1.06       4623 1.00
+## 
+## Samples were drawn using sampling(NUTS). For each parameter, Eff.Sample 
+## is a crude measure of effective sample size, and Rhat is the potential 
+## scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
+</div>
+
+  <br>
+    <hr>
+    
+    <div class="column-left">
+    <p>
+    <b>Advanced Analysis in R</b><br>
+    <a href="mailto:me.dewitt.jr@gmail.com">me.dewitt.jr@gmail.com</a> <br>
+    </p>
+    </div>
+    
+    <div class="column-center">
+    <p>
+    Office of Institutional Research <br>
+    309 Reynolda Hall <br>
+    Winston- Salem, NC, 27106<br>
+    </p>
+    
+    </div>
+    
+    <div class="column-right">
+    Michael DeWitt <br>
+    <a href="https://github.com/medewitt"><i class="fa fa-github"></i></a>
+    </div>
+    
+    <br>
+    <br>
+    <center>
+    <p>Copyright &copy; 2018 Michael DeWitt. All rights reserved.</p>
+    </center>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

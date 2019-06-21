@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018/W32TeX) (preloaded format=pdflatex 2019.2.26)  16 APR 2019 12:43
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018/W32TeX) (preloaded format=pdflatex 2019.2.26)  16 APR 2019 13:52
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1404,12 +1404,12 @@ File: t1lmss.fd 2009/10/30 v1.6 Font defs for Latin Modern
 * layout: <same size as paper>
 * layoutoffset:(h,v)=(0.0pt,0.0pt)
 * modes: includehead includefoot 
-* h-part:(L,W,R)=(28.45274pt, 307.28987pt, 28.45274pt)
-* v-part:(T,H,B)=(0.0pt, 273.14662pt, 0.0pt)
-* \paperwidth=364.19536pt
-* \paperheight=273.14662pt
-* \textwidth=307.28987pt
-* \textheight=244.6939pt
+* h-part:(L,W,R)=(28.45274pt, 398.3386pt, 28.45274pt)
+* v-part:(T,H,B)=(0.0pt, 256.0748pt, 0.0pt)
+* \paperwidth=455.24408pt
+* \paperheight=256.0748pt
+* \textwidth=398.3386pt
+* \textheight=227.62207pt
 * \oddsidemargin=-43.81725pt
 * \evensidemargin=-43.81725pt
 * \topmargin=-72.26999pt
@@ -1620,7 +1620,11 @@ le (type pdf)
 <use bayesian_modeling_files/figure-beamer/relationship-prior-1.pdf>
 Package pdftex.def Info: bayesian_modeling_files/figure-beamer/relationship-pri
 or-1.pdf  used on input line 260.
-(pdftex.def)             Requested size: 215.10196pt x 150.57167pt.
+(pdftex.def)             Requested size: 278.83578pt x 195.18121pt.
+
+Overfull \vbox (38.18388pt too high) detected at line 260
+ []
+
 [10
 
  <./bayesian_modeling_files/figure-beamer/relationship-prior-1.pdf>]
@@ -1631,7 +1635,11 @@ e (type pdf)
 <use bayesian_modeling_files/figure-beamer/informative-prior-1.pdf>
 Package pdftex.def Info: bayesian_modeling_files/figure-beamer/informative-prio
 r-1.pdf  used on input line 269.
-(pdftex.def)             Requested size: 215.10196pt x 150.57167pt.
+(pdftex.def)             Requested size: 278.83578pt x 195.18121pt.
+
+Overfull \vbox (23.82838pt too high) detected at line 269
+ []
+
 [11
 
  <./bayesian_modeling_files/figure-beamer/informative-prior-1.pdf>] [12
@@ -1641,7 +1649,7 @@ r-1.pdf  used on input line 269.
 ] [14
 
 ]
-Overfull \vbox (6.29208pt too high) detected at line 324
+Overfull \vbox (9.56398pt too high) detected at line 324
  []
 
 [15
@@ -1704,9 +1712,9 @@ File: bayesian_modeling_files/figure-beamer/unnamed-chunk-5-1.pdf Graphic file
 <use bayesian_modeling_files/figure-beamer/unnamed-chunk-5-1.pdf>
 Package pdftex.def Info: bayesian_modeling_files/figure-beamer/unnamed-chunk-5-
 1.pdf  used on input line 15.
-(pdftex.def)             Requested size: 184.3758pt x 129.05812pt.
+(pdftex.def)             Requested size: 239.00558pt x 167.29929pt.
 )
-Overfull \vbox (6.42323pt too high) detected at line 495
+Overfull \vbox (47.9363pt too high) detected at line 495
  []
 
 [24
@@ -1715,7 +1723,7 @@ Overfull \vbox (6.42323pt too high) detected at line 495
 \openout4 = `bayesian_modeling.vrb'.
 
 (./bayesian_modeling.vrb)
-Overfull \vbox (47.39641pt too high) detected at line 524
+Overfull \vbox (64.46823pt too high) detected at line 524
  []
 
 [25
@@ -1731,8 +1739,12 @@ File: bayesian_modeling_files/figure-beamer/unnamed-chunk-7-1.pdf Graphic file
 <use bayesian_modeling_files/figure-beamer/unnamed-chunk-7-1.pdf>
 Package pdftex.def Info: bayesian_modeling_files/figure-beamer/unnamed-chunk-7-
 1.pdf  used on input line 12.
-(pdftex.def)             Requested size: 184.3758pt x 129.05812pt.
-) [26
+(pdftex.def)             Requested size: 239.00558pt x 167.29929pt.
+)
+Overfull \vbox (20.91196pt too high) detected at line 539
+ []
+
+[26
 
  <./bayesian_modeling_files/figure-beamer/unnamed-chunk-7-1.pdf>] [27
 
@@ -1740,7 +1752,7 @@ Package pdftex.def Info: bayesian_modeling_files/figure-beamer/unnamed-chunk-7-
 \openout4 = `bayesian_modeling.vrb'.
 
 (./bayesian_modeling.vrb)
-Overfull \vbox (47.39641pt too high) detected at line 579
+Overfull \vbox (64.46823pt too high) detected at line 579
  []
 
 [28
@@ -1756,8 +1768,12 @@ File: bayesian_modeling_files/figure-beamer/unnamed-chunk-9-1.pdf Graphic file
 <use bayesian_modeling_files/figure-beamer/unnamed-chunk-9-1.pdf>
 Package pdftex.def Info: bayesian_modeling_files/figure-beamer/unnamed-chunk-9-
 1.pdf  used on input line 14.
-(pdftex.def)             Requested size: 184.3758pt x 129.05812pt.
-) [29
+(pdftex.def)             Requested size: 239.00558pt x 167.29929pt.
+)
+Overfull \vbox (48.56854pt too high) detected at line 596
+ []
+
+[29
 
  <./bayesian_modeling_files/figure-beamer/unnamed-chunk-9-1.pdf>]
 \openout4 = `bayesian_modeling.vrb'.
@@ -1789,7 +1805,7 @@ Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 674.
 Here is how much of TeX's memory you used:
  34713 strings out of 494562
  675956 string characters out of 6175863
- 848152 words of memory out of 5000000
+ 848139 words of memory out of 5000000
  37699 multiletter control sequences out of 15000+600000
  583495 words of font info for 62 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
@@ -1815,7 +1831,7 @@ f-dist/fonts/type1/public/lm/lmtk10.pfb><c:/Users/dewittme/AppData/Roaming/Tiny
 TeX/texmf-dist/fonts/type1/public/lm/lmtt10.pfb><c:/Users/dewittme/AppData/Roam
 ing/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt9.pfb><c:/Users/dewittme/AppDa
 ta/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtti10.pfb>
-Output written on bayesian_modeling.pdf (33 pages, 731931 bytes).
+Output written on bayesian_modeling.pdf (33 pages, 731855 bytes).
 PDF statistics:
  365 PDF objects out of 1000 (max. 8388607)
  297 compressed objects within 3 object streams
